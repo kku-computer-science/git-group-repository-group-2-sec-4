@@ -52,8 +52,8 @@
 This is a user manual for Sprint#1 for both users and admins.
 
 ## Sprint#1 Details
-- As an administrator, I want to view system logs.
-- As a user, I want to check information about each laboratory and researcher.
+- As an admin, I want to see the log of the system
+- As a user, I want to check on information of each lab and each researcher.
 
 ## How to Use
 
