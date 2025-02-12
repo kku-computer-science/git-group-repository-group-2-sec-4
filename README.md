@@ -27,16 +27,16 @@
 #### ไปยังหน้าหลัก
 1. คลิกที่ **RESEARCH GROUP**
 
-![r_1](Img/ResearchGroup_1.png)
+![r_1](Img/ResearchGroup_1_th.png)
 
 2. จะแสดงรายละเอียด Research group ทั้งหมด
 
-![r_2](Img/ResearchGroup_2.png)
+![r_2](Img/ResearchGroup_2_th.png)
 
 3. หากสนใจอันไหนสามารถกดที่ **More details**
 4. โดยจะแสดงรายละเอียดของ Research group นั้นๆ
 
-![r_3](Img/ResearchGroup_3.png)
+![r_3](Img/ResearchGroup_3_th.png)
 
 ### วิธีการใช้งานสำหรับ Admin
 #### ไปยังหน้า login
