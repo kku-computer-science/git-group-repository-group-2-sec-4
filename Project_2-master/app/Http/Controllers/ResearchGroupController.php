@@ -31,27 +31,45 @@ class ResearchGroupController extends Controller
     public function index()
     {
         try {
-            $researchGroups = ResearchGroup::with('User')->get();
+            $user = Auth::user(); // ดึงข้อมูลผู้ใช้ที่ล็อกอิน
+
+            if (!$user) {
+                return redirect()->route('login')->withErrors(['error' => 'Please login to continue.']);
+            }
+
+            if ($user->role === 'admin') {
+                // Admin เห็นทุกกลุ่ม
+                $researchGroups = ResearchGroup::with('user')->get();
+            } else {
+                // ดึงเฉพาะกลุ่มที่ผู้ใช้เป็น Head หรือ Member
+                $researchGroups = ResearchGroup::whereHas('workOfResearchGroups', function ($query) use ($user) {
+                    $query->where('user_id', $user->id);
+                })->with('user')->get();
+            }
 
             LogHelper::log(
                 'Viewed Research Groups List',
                 'INFO',
-                'User ' . Auth::user()->email . ' viewed the research groups list.',
+                'User ' . $user->email . ' viewed the research groups list.',
                 'research_groups'
             );
 
             return view('research_groups.index', compact('researchGroups'));
+
         } catch (\Exception $e) {
             LogHelper::log(
                 'Research Groups List View Failed',
                 'ERROR',
-                'User ' . Auth::user()->email . ' failed to view research groups list. Error: ' . $e->getMessage(),
+                'User ' . ($user->email ?? 'Unknown') . ' failed to view research groups list. Error: ' . $e->getMessage(),
                 'research_groups'
             );
 
-            return redirect()->back()->withErrors(['error' => 'An error occurred while loading the research groups list.']);
+            return view('research_groups.index', ['researchGroups' => collect()]); // ส่ง array เปล่าให้หน้าเว็บแสดงผลได้
         }
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
