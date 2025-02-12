@@ -10,8 +10,25 @@ class Log extends Model
 
     protected $table = 'logs';
 
+    // protected $fillable = [
+    //     'user_id',
+    //     'action',
+    //     'log_level',
+    //     'message',
+    //     'ip_address',
+    //     'related_table',
+    //     'related_id'
+    // ];
     protected $fillable = [
-        'user_id', 'action', 'log_level', 'message', 'ip_address', 'related_table', 'related_id'
+        'log_id',
+        'user_id',
+        'action',
+        'log_level',
+        'message',
+        'ip_address',
+        'related_table',
+        'related_id',
+        'created_at'
     ];
 
     public $timestamps = false;
