@@ -32,10 +32,25 @@
 
 ### วิธีการใช้งานสำหรับ Admin
 #### ไปยังหน้า login
+
+![s_1](Img/SystemLogs_1.png)
+
 1. ใส่ **username** และ **password** ด้วย Admin account
+
+![s_2](Img/SystemLogs_2.png)
+
 2. หลังจาก login สำเร็จจะมายังหน้า Dashboard
+
+![s_3](Img/SystemLogs_3.png)
+
 3. คลิกไปยังส่วนของ system log
+
+![s_4](Img/SystemLogs_4.png)
+
 4. โดยจะแสดงรายละเอียดของ system log เช่น การ login, logout และกิจกรรมที่ทำให้ในระบบทั้งหมด
+
+![s_5](Img/SystemLogs_5.png)
+
    
 ---
 
@@ -66,8 +81,22 @@ This is a user manual for Sprint#1 for both users and admins.
 
 ### How to Use for Admin
 #### Go to the Login Page
+![s_1](Img/SystemLogs_1.png)
+
 1. Enter **username** and **password** with an Admin account.
-2. After successful login, you will be redirected to the Dashboard.
-3. Click on the **system log** section.
-4. The system log will display details such as login, logout, and all activities performed within the system.
+   
+![s_2](Img/SystemLogs_2.png)
+
+3. After successful login, you will be redirected to the Dashboard.
+
+![s_3](Img/SystemLogs_3.png)
+
+
+4. Click on the **system log** section.
+
+![s_4](Img/SystemLogs_4.png)
+
+5. The system log will display details such as login, logout, and all activities performed within the system.
+   
+![s_5](Img/SystemLogs_5.png)   
    
