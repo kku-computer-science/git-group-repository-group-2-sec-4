@@ -32,10 +32,25 @@
 
 ### วิธีการใช้งานสำหรับ Admin
 #### ไปยังหน้า login
+
+![s_1](Img/SystemLogs_1.png)
+
 1. ใส่ **username** และ **password** ด้วย Admin account
+
+![s_2](Img/SystemLogs_2.png)
+
 2. หลังจาก login สำเร็จจะมายังหน้า Dashboard
+
+![s_3](Img/SystemLogs_3.png)
+
 3. คลิกไปยังส่วนของ system log
+
+![s_4](Img/SystemLogs_4.png)
+
 4. โดยจะแสดงรายละเอียดของ system log เช่น การ login, logout และกิจกรรมที่ทำให้ในระบบทั้งหมด
+
+![s_5](Img/SystemLogs_5.png)
+
    
 ---
 
