@@ -26,9 +26,17 @@
 ### วิธีการใช้งานสำหรับ User 
 #### ไปยังหน้าหลัก
 1. คลิกที่ **RESEARCH GROUP**
+
+![r_1](Img/ResearchGroup_1.png)
+
 2. จะแสดงรายละเอียด Research group ทั้งหมด
+
+![r_2](Img/ResearchGroup_2.png)
+
 3. หากสนใจอันไหนสามารถกดที่ **More details**
 4. โดยจะแสดงรายละเอียดของ Research group นั้นๆ
+
+![r_3](Img/ResearchGroup_3.png)
 
 ### วิธีการใช้งานสำหรับ Admin
 #### ไปยังหน้า login
@@ -75,9 +83,17 @@ This is a user manual for Sprint#1 for both users and admins.
 ### How to Use for User
 #### Go to the Main Page
 1. Click on **RESEARCH GROUP**.
+
+![r_1](Img/ResearchGroup_1.png)
+
 2. Details of all Research Groups will be displayed.
 3. If interested, click on **More details**.
+
+![r_2](Img/ResearchGroup_2.png)
+
 4. The details of the selected Research Group will be shown.
+
+![r_3](Img/ResearchGroup_3.png)
 
 ### How to Use for Admin
 #### Go to the Login Page
