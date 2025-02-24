@@ -220,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                     @endcan
                     @can('user-list')
-                        <li class="nav-item nav-category">Admin11</li>
+                        <li class="nav-item nav-category">Admin112</li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index')}}">
                                 <i class="menu-icon mdi mdi-account-multiple-outline"></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2025 at 05:43 PM
+-- Generation Time: Feb 24, 2025 at 05:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -103,7 +103,6 @@ INSERT INTO `academicworks` (`id`, `ac_name`, `ac_type`, `ac_sourcetitle`, `ac_y
 (73, 'ผจญภัยในโลกนิทาน (Advance in the Fairytale World)', 'ลิขสิทธิ์', NULL, '2559-12-02', '349046', NULL, '2022-05-15 06:37:09', '2022-05-15 06:37:09'),
 (74, 'เว็บแอปพลิเคชันเพื่อแนะนำการลงทะเบียนและตรวจสอบจบ', 'ลิขสิทธิ์', NULL, '2559-12-14', '349040', NULL, '2022-05-15 06:38:25', '2022-05-15 06:38:25'),
 (75, 'โปรแกรมระบบสังเคราะห์เสียงพูดภาษาถิ่นอีสาน', 'ลิขสิทธิ์', NULL, '2558-05-18', '323716', NULL, '2022-05-15 06:40:41', '2022-05-15 06:40:41'),
-(77, 'tt', 'book', 'kku', '2025-02-05', NULL, '21', '2025-02-11 09:01:26', '2025-02-11 09:01:26'),
 (78, 't1', 'book', 'jh', '2025-02-05', NULL, '2', '2025-02-11 09:01:52', '2025-02-11 09:01:52'),
 (79, 'joeyboy', 'สิทธิบัตร', NULL, '2025-02-07', '23134', NULL, '2025-02-11 09:16:41', '2025-02-11 09:16:41'),
 (80, 'joey1', 'สิทธิบัตร (การประดิษฐ์)', NULL, '2025-02-05', '24311', NULL, '2025-02-11 09:17:18', '2025-02-11 09:17:18'),
@@ -2774,204 +2773,44 @@ INSERT INTO `logs` (`log_id`, `user_id`, `action`, `log_level`, `message`, `ip_a
 (322, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 13:58:19'),
 (323, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 13:58:19'),
 (324, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:00:44'),
-(325, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:19:18'),
-(326, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-12 14:22:48'),
-(327, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 14:23:01'),
-(328, 157, 'User Logged In', 'INFO', 'User jonathan.teacher1@gmail.com logged in successfully.', '127.0.0.1', 'users', 157, '2025-02-12 14:23:01'),
-(329, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:23:04'),
-(330, 157, 'Created Research Group', 'INFO', 'User jonathan.teacher1@gmail.com created a research group: sa', '127.0.0.1', 'research_groups', 16, '2025-02-12 14:23:31'),
-(331, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:23:32'),
-(332, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:26:26'),
-(333, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 14:38:32'),
-(334, 157, 'User Logged In', 'INFO', 'User jonathan.teacher1@gmail.com logged in successfully.', '127.0.0.1', 'users', 157, '2025-02-12 14:38:33'),
-(335, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:35'),
-(336, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:38'),
-(337, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:39'),
-(338, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:42'),
-(339, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:42'),
-(340, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:44'),
-(341, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:44'),
-(342, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:46'),
-(343, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:46'),
-(344, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:48'),
-(345, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:48'),
-(346, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:50'),
-(347, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:51'),
-(348, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:53'),
-(349, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:55'),
-(350, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:56'),
-(351, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:57'),
-(352, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:38:58'),
-(353, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:38:59'),
-(354, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 14:43:13'),
-(355, 157, 'User Logged In', 'INFO', 'User jonathan.teacher1@gmail.com logged in successfully.', '127.0.0.1', 'users', 157, '2025-02-12 14:43:13'),
-(356, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:43:15'),
-(357, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:43:17'),
-(358, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:43:19'),
-(359, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:43:21'),
-(360, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:43:21'),
-(361, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:43:23'),
-(362, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:43:24'),
-(363, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:44:19'),
-(364, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:44:20'),
-(365, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:44:41'),
-(366, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:44:42'),
-(367, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:48:52'),
-(368, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:48:53'),
-(369, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:48:55'),
-(370, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:48:55'),
-(371, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:48:56'),
-(372, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:48:56'),
-(373, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:50:47'),
-(374, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:50:49'),
-(375, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 14:50:49'),
-(376, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:50:55'),
-(377, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:50:56'),
-(378, 157, 'Research Groups List View Failed', 'ERROR', 'Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head_id\' in \'where clause\' (SQL: select * from `research_groups` where `head_id` = 157 or exists (select * from `research_group_members` where `research_groups`.`id` = `research_group_members`.`research_group_id` and `user_id` = 157))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:50:57'),
-(379, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 14:54:13'),
-(380, 157, 'User Logout', 'INFO', 'User jonathan.teacher1@gmail.com logged out successfully.', '127.0.0.1', 'users', 157, '2025-02-12 14:59:46'),
-(381, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 14:59:55'),
-(382, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 14:59:55'),
-(383, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:00:13'),
-(384, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-12 15:00:16'),
-(385, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:00:28'),
-(386, 157, 'User Logged In', 'INFO', 'User jonathan.teacher1@gmail.com logged in successfully.', '127.0.0.1', 'users', 157, '2025-02-12 15:00:28'),
-(387, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:00:31'),
-(388, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:00:33'),
-(389, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:00:34'),
-(390, 157, 'User Logout', 'INFO', 'User jonathan.teacher1@gmail.com logged out successfully.', '127.0.0.1', 'users', 157, '2025-02-12 15:04:16'),
-(391, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.student1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:05:39'),
-(392, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.student1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:05:39'),
-(393, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.student1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:05:47'),
-(394, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.student1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:05:47'),
-(395, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher1@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:05:57'),
-(396, 157, 'User Logged In', 'INFO', 'User jonathan.teacher1@gmail.com logged in successfully.', '127.0.0.1', 'users', 157, '2025-02-12 15:05:57'),
-(397, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:06:00'),
-(398, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head\' in \'where clause\' (SQL: select * from `research_groups` where `head` is null or `member` LIKE %%)', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:09:56'),
-(399, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head\' in \'where clause\' (SQL: select * from `research_groups` where `head` is null or `member` LIKE %%)', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:09:58'),
-(400, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head\' in \'where clause\' (SQL: select * from `research_groups` where `head` is null or `member` LIKE %%)', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:09:59'),
-(401, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head\' in \'where clause\' (SQL: select * from `research_groups` where `head` = 157 or FIND_IN_SET(157, member))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:11:30'),
-(402, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:11:34'),
-(403, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head\' in \'where clause\' (SQL: select * from `research_groups` where `head` = 157 or FIND_IN_SET(157, member))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:11:35'),
-(404, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:11:36'),
-(405, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:11:44'),
-(406, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'head\' in \'where clause\' (SQL: select * from `research_groups` where `head` = 157 or FIND_IN_SET(157, member))', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:11:45'),
-(407, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:11:46'),
-(408, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:21'),
-(409, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:23'),
-(410, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:24'),
-(411, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:26'),
-(412, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:26'),
-(413, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:27'),
-(414, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:28'),
-(415, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:29'),
-(416, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:29'),
-(417, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:31'),
-(418, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:31'),
-(419, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:32'),
-(420, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:33'),
-(421, 157, 'Research Groups List View Failed', 'ERROR', 'User jonathan.teacher1@gmail.com failed to view research groups list. Error: Call to undefined relationship [users] on model [App\\Models\\ResearchGroup].', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:18:34'),
-(422, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:18:34'),
-(423, 157, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 15:22:05'),
-(424, 157, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher1@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:22:07'),
-(425, 157, 'User Logout', 'INFO', 'User jonathan.teacher1@gmail.com logged out successfully.', '127.0.0.1', 'users', 157, '2025-02-12 15:22:54'),
-(426, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:23:02'),
-(427, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 15:23:02'),
-(428, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:23:04'),
-(429, 1, 'Created Research Group', 'INFO', 'User admin@gmail.com created a research group: yyy', '127.0.0.1', 'research_groups', 17, '2025-02-12 15:24:40'),
-(430, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:24:40'),
-(431, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-12 15:24:42'),
-(432, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 15:24:56'),
-(433, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-12 15:24:56'),
-(434, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 15:24:58'),
-(435, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-12 15:25:19'),
-(436, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:11:05'),
-(437, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 16:11:05'),
-(438, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:18:39'),
-(439, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 16:18:39'),
-(440, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-12 16:24:09'),
-(441, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.student@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:24:25'),
-(442, 154, 'User Logged In', 'INFO', 'User jonathan.student@gmail.com logged in successfully.', '127.0.0.1', 'users', 154, '2025-02-12 16:24:25'),
-(443, 154, 'User Logout', 'INFO', 'User jonathan.student@gmail.com logged out successfully.', '127.0.0.1', 'users', 154, '2025-02-12 16:24:36'),
-(444, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.student@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:24:48'),
-(445, 154, 'User Logged In', 'INFO', 'User jonathan.student@gmail.com logged in successfully.', '127.0.0.1', 'users', 154, '2025-02-12 16:24:49'),
-(446, 154, 'User Logout', 'INFO', 'User jonathan.student@gmail.com logged out successfully.', '127.0.0.1', 'users', 154, '2025-02-12 16:25:04'),
-(447, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:25:12'),
-(448, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-12 16:25:13'),
-(449, 153, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 16:25:14'),
-(450, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 16:25:22'),
-(451, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-12 16:25:38'),
-(452, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.staff@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:25:49'),
-(453, 155, 'User Logged In', 'INFO', 'User jonathan.staff@gmail.com logged in successfully.', '127.0.0.1', 'users', 155, '2025-02-12 16:25:49'),
-(454, 155, 'Viewed Research Projects List', 'INFO', 'User jonathan.staff@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 16:25:52'),
-(455, 155, 'Viewed Research Groups List', 'INFO', 'User jonathan.staff@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-12 16:25:54'),
-(456, 155, 'User Logout', 'INFO', 'User jonathan.staff@gmail.com logged out successfully.', '127.0.0.1', 'users', 155, '2025-02-12 16:26:04'),
-(457, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:26:20'),
-(458, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 16:26:20'),
-(459, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:58:17'),
-(460, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 16:58:17'),
-(461, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-12 16:58:54'),
-(462, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.student@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:59:07'),
-(463, 154, 'User Logged In', 'INFO', 'User jonathan.student@gmail.com logged in successfully.', '127.0.0.1', 'users', 154, '2025-02-12 16:59:07'),
-(464, 154, 'User Logout', 'INFO', 'User jonathan.student@gmail.com logged out successfully.', '127.0.0.1', 'users', 154, '2025-02-12 16:59:11'),
-(465, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 16:59:28'),
-(466, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-12 16:59:28'),
-(467, 153, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-12 16:59:31'),
-(468, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-12 16:59:36'),
-(469, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-12 19:11:16'),
-(470, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-12 19:11:17'),
-(471, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-13 03:42:11'),
-(472, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-13 03:42:13'),
-(473, NULL, 'Login Attempt', 'INFO', 'Login attempt by: dsa', '127.0.0.1', 'users', NULL, '2025-02-13 03:46:09'),
-(474, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: dsa', '127.0.0.1', 'users', NULL, '2025-02-13 03:46:09'),
-(475, NULL, 'Login Attempt', 'INFO', 'Login attempt by: admin@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-13 03:48:25'),
-(476, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-13 03:48:25'),
-(477, NULL, 'Login Attempt', 'INFO', 'Login attempt by: dsa', '127.0.0.1', 'users', NULL, '2025-02-13 03:48:48'),
-(478, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: dsa', '127.0.0.1', 'users', NULL, '2025-02-13 03:48:49'),
-(479, NULL, 'Login Attempt', 'INFO', 'Login attempt by: jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-13 03:49:10'),
-(480, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-13 03:49:11'),
-(481, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-13 03:49:53'),
-(482, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-13 03:50:09'),
-(483, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-13 03:50:17'),
-(484, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: dasda', '127.0.0.1', 'users', NULL, '2025-02-13 03:50:21'),
-(485, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-13 03:52:21'),
-(486, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-13 03:52:52'),
-(487, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-13 03:54:13'),
-(488, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-13 03:55:07'),
-(489, 153, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-13 03:55:09'),
-(490, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-13 03:55:23'),
-(491, 153, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-13 03:55:29'),
-(492, 153, 'Created Fund', 'INFO', 'User jonathan.teacher@gmail.com created a research fund: tt', '127.0.0.1', 'funds', 35, '2025-02-13 03:55:36'),
-(493, 153, 'Editing Fund', 'INFO', 'User jonathan.teacher@gmail.com is editing fund: tt', '127.0.0.1', 'funds', 35, '2025-02-13 03:55:55'),
-(494, 153, 'Updated Fund', 'INFO', 'User jonathan.teacher@gmail.com updated fund: ttdsa', '127.0.0.1', 'funds', 35, '2025-02-13 03:55:57'),
-(495, 153, 'Editing Fund', 'INFO', 'User jonathan.teacher@gmail.com is editing fund: ttdsa', '127.0.0.1', 'funds', 35, '2025-02-13 03:56:06'),
-(496, 153, 'Fund Validation Failed', 'ERROR', 'User jonathan.teacher@gmail.com attempted to update fund but failed validation. Errors: {\"fund_name\":[\"The fund name field is required.\"],\"support_resource\":[\"The support resource field is required.\"]}', '127.0.0.1', 'funds', 35, '2025-02-13 03:56:09'),
-(497, 153, 'Editing Fund', 'INFO', 'User jonathan.teacher@gmail.com is editing fund: ttdsa', '127.0.0.1', 'funds', 35, '2025-02-13 03:56:09'),
-(498, 153, 'Deleted Fund', 'WARNING', 'User jonathan.teacher@gmail.com deleted fund: ttdsa', '127.0.0.1', 'funds', 35, '2025-02-13 03:56:25'),
-(499, 153, 'Viewed Research Projects List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-13 04:19:20'),
-(500, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-13 04:19:22'),
-(501, 153, 'Created Research Group', 'INFO', 'User jonathan.teacher@gmail.com created a research group: dsa', '127.0.0.1', 'research_groups', 18, '2025-02-13 04:19:42'),
-(502, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-13 04:19:42'),
-(503, 153, 'Editing Research Group', 'INFO', 'User jonathan.teacher@gmail.com is editing research group: test333', '127.0.0.1', 'research_groups', 11, '2025-02-13 04:20:44'),
-(504, 153, 'Research Group Validation Failed', 'ERROR', 'User jonathan.teacher@gmail.com attempted to update research group but failed validation. Errors: {\"group_name_th\":[\"The group name th field is required.\"],\"group_name_en\":[\"The group name en field is required.\"]}', '127.0.0.1', 'research_groups', 11, '2025-02-13 04:22:54'),
-(505, 153, 'Editing Research Group', 'INFO', 'User jonathan.teacher@gmail.com is editing research group: test333', '127.0.0.1', 'research_groups', 11, '2025-02-13 04:22:54'),
-(506, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-13 04:24:12'),
-(507, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-13 04:27:08'),
-(508, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-13 04:27:13'),
-(509, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: ่jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-13 04:27:26'),
-(510, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: ่jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-13 04:27:31'),
-(511, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: ่jonathan.teacher@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-13 04:27:41'),
-(512, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-13 04:27:52'),
-(513, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-13 04:27:54'),
-(514, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-13 04:28:41'),
-(515, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-13 04:34:54'),
-(516, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-20 04:24:19'),
-(517, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: das', '127.0.0.1', 'users', NULL, '2025-02-20 04:24:58'),
-(518, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.d@kkumail.com', '127.0.0.1', 'users', NULL, '2025-02-20 04:54:11'),
-(519, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.d@kkumail.com', '127.0.0.1', 'users', NULL, '2025-02-20 04:54:22'),
-(520, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.d@kkumail.com', '127.0.0.1', 'users', NULL, '2025-02-20 04:54:29'),
-(521, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.d@kkumail.com', '127.0.0.1', 'users', NULL, '2025-02-20 04:54:36'),
-(522, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: jonathan.d@kkumail.com', '127.0.0.1', 'users', NULL, '2025-02-20 04:54:37');
+(325, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 15:47:33'),
+(326, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: dsad', '127.0.0.1', 'users', NULL, '2025-02-24 15:53:29'),
+(327, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: joodsads', '127.0.0.1', 'users', NULL, '2025-02-24 15:53:45'),
+(328, 153, 'User Logged In', 'INFO', 'User jonathan.teacher@gmail.com logged in successfully.', '127.0.0.1', 'users', 153, '2025-02-24 15:54:00'),
+(329, 153, 'Created Fund', 'INFO', 'User jonathan.teacher@gmail.com created a research fund: dsad', '127.0.0.1', 'funds', 35, '2025-02-24 15:54:19'),
+(330, 153, 'Editing Fund', 'INFO', 'User jonathan.teacher@gmail.com is editing fund: dsad', '127.0.0.1', 'funds', 35, '2025-02-24 15:54:26'),
+(331, 153, 'Updated Fund', 'INFO', 'User jonathan.teacher@gmail.com updated fund: dsaddsads', '127.0.0.1', 'funds', 35, '2025-02-24 15:54:30'),
+(332, 153, 'Editing Fund', 'INFO', 'User jonathan.teacher@gmail.com is editing fund: dsaddsads', '127.0.0.1', 'funds', 35, '2025-02-24 15:54:45'),
+(333, 153, 'Fund Validation Failed', 'ERROR', 'User jonathan.teacher@gmail.com attempted to update fund but failed validation. Errors: {\"fund_name\":[\"The fund name field is required.\"],\"support_resource\":[\"The support resource field is required.\"]}', '127.0.0.1', 'funds', 35, '2025-02-24 15:54:48'),
+(334, 153, 'Editing Fund', 'INFO', 'User jonathan.teacher@gmail.com is editing fund: dsaddsads', '127.0.0.1', 'funds', 35, '2025-02-24 15:54:48'),
+(335, 153, 'Deleted Fund', 'WARNING', 'User jonathan.teacher@gmail.com deleted fund: dsaddsads', '127.0.0.1', 'funds', 35, '2025-02-24 15:55:02'),
+(336, 153, 'Created Research Paper', 'INFO', 'User jonathan.teacher@gmail.com created research paper: ds', '127.0.0.1', 'papers', 593, '2025-02-24 15:56:11'),
+(337, 153, 'Updated Research Paper', 'INFO', 'User jonathan.teacher@gmail.com updated research paper: ewqeqw', '127.0.0.1', 'papers', 578, '2025-02-24 15:56:28'),
+(338, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-24 15:56:36'),
+(339, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-24 15:56:54'),
+(340, 153, 'Deleted Research Group', 'WARNING', 'User jonathan.teacher@gmail.com deleted research group: test333', '127.0.0.1', 'research_groups', 11, '2025-02-24 15:57:00'),
+(341, 153, 'Viewed Research Groups List', 'INFO', 'User jonathan.teacher@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-24 15:57:00'),
+(342, 153, 'User Logout', 'INFO', 'User jonathan.teacher@gmail.com logged out successfully.', '127.0.0.1', 'users', 153, '2025-02-24 15:57:14'),
+(343, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: ่jonathan.studen@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-24 15:58:24'),
+(344, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: ่jonathan.student@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-24 15:58:31'),
+(345, NULL, 'Failed Login Attempt', 'WARNING', 'Failed login attempt for username: ่jonathan.student@gmail.com', '127.0.0.1', 'users', NULL, '2025-02-24 15:58:40'),
+(346, 154, 'User Logged In', 'INFO', 'User jonathan.student@gmail.com logged in successfully.', '127.0.0.1', 'users', 154, '2025-02-24 15:59:01'),
+(347, 154, 'Deleted Book', 'WARNING', 'User jonathan.student@gmail.com deleted book: tt', '127.0.0.1', 'books', 77, '2025-02-24 15:59:15'),
+(348, 154, 'User Updated Profile', 'INFO', 'User jonathan.student@gmail.com updated their profile.', '127.0.0.1', 'users', 154, '2025-02-24 15:59:31'),
+(349, 154, 'User Logout', 'INFO', 'User jonathan.student@gmail.com logged out successfully.', '127.0.0.1', 'users', 154, '2025-02-24 15:59:37'),
+(350, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:04:26'),
+(351, 1, 'User Created', 'INFO', 'New user created: admin1@gmail.com', '127.0.0.1', 'users', 158, '2025-02-24 16:06:03'),
+(352, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:06:06'),
+(353, 158, 'User Logged In', 'INFO', 'User admin1@gmail.com logged in successfully.', '127.0.0.1', 'users', 158, '2025-02-24 16:06:16'),
+(354, 158, 'User Logout', 'INFO', 'User admin1@gmail.com logged out successfully.', '127.0.0.1', 'users', 158, '2025-02-24 16:06:22'),
+(355, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:06:50'),
+(356, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:09:21'),
+(357, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:12:24'),
+(358, 1, 'Viewed Research Projects List', 'INFO', 'User admin@gmail.com viewed the research projects list.', '127.0.0.1', 'research_projects', NULL, '2025-02-24 16:22:52'),
+(359, 1, 'Viewed Research Groups List', 'INFO', 'User admin@gmail.com viewed the research groups list.', '127.0.0.1', 'research_groups', NULL, '2025-02-24 16:22:53'),
+(360, 1, 'User Logout', 'INFO', 'User admin@gmail.com logged out successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:25:34'),
+(361, 1, '1User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:25:51'),
+(362, 1, 'User Logged In', 'INFO', 'User admin@gmail.com logged in successfully.', '127.0.0.1', 'users', 1, '2025-02-24 16:34:29');
 
 -- --------------------------------------------------------
 
@@ -3058,6 +2897,7 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
 (1, 'App\\Models\\User', 47),
+(1, 'App\\Models\\User', 158),
 (2, 'App\\Models\\User', 2),
 (2, 'App\\Models\\User', 3),
 (2, 'App\\Models\\User', 4),
@@ -3889,7 +3729,7 @@ INSERT INTO `papers` (`id`, `paper_name`, `abstract`, `paper_type`, `paper_subty
 (575, 'A Comprehensive Study on Machine Learning Algorithmsshsds', 'This paper presents a detailed analysis of various machine learning algorithms and their applications in real-world scenarios.eegr', 'Conference Proceeding', 'Article', 'Journal of Computer Science', '[\"Machine Learning; Data Science; Artificial Intelligence\"]', 'https://www.example.com/research-paper', 'International Journal', '2025', '32', '3', 15, '123-135', '10.1234/ijcs.2024.03203', 'National Research Council of Thailand', NULL, '2024-12-24 14:27:36', '2025-02-11 21:51:18'),
 (576, 'dsa', 'dsadas', 'Conference Proceeding', 'Article', 'Journal of Computer Science111', '[{\"$\":\"Machine Learning; Data Science; Artificial Intelligence\"}]', 'https://www.example.com/research-paper', 'International Journal', '2024', '32', '3', 151, '01-99', '10.1234/ijcs.2024.03203', 'National Research Council of Thailand', NULL, '2025-01-05 10:27:09', '2025-01-05 10:27:09'),
 (577, 'A Comprehensive Study on Machine Learning Algorithmsaaa', 'dsa', 'Journal', 'Book Chapter', 'Journal of Computer Science1112', '[{\"$\":\"hyper\"}]', 'https://www.example.com/research-paper', 'International Book', '2024', '32', '3', 15, '01-99', '10.1234/ijcs.2024.03203', 'National Research Council of Thailand', NULL, '2025-02-09 19:34:49', '2025-02-09 19:34:49'),
-(578, 'ewqeqw', 'dsad', 'Conference Proceeding', 'Editorial', 'ccxzc', '[{\"$\":\"lego\"}]', 'www.google.com', 'National Conference', '2020', '21', '2', 32, '01-99', 'dsadsadsdsds/dsadsad', 'hogwarts', NULL, '2025-02-10 07:21:25', '2025-02-10 07:21:25'),
+(578, 'ewqeqw', 'dsad', 'Conference Proceeding', 'Editorial', 'ccxzc', '[\"lego\"]', 'www.google.com', 'National Conference', '2020', '21', '2', 32, '01-99', 'dsadsadsdsds/dsadsad', 'hogwarts', NULL, '2025-02-10 07:21:25', '2025-02-24 15:56:28'),
 (579, 'saaa', 'sddsf', 'Conference Proceeding', 'Book Chapter', 'hello world1', '[{\"$\":\"lego\"}]', 'www.google.com', 'National Conference', '2021', '21', '12', 32, '01-99', 'dsadsadsdsds/dsadsad', 'hogwarts', NULL, '2025-02-10 07:56:54', '2025-02-10 07:56:54'),
 (580, 'adasdasdaT1', NULL, 'Journal', 'Conference Paper', 'asss', '[\"lego\"]', 'www.google.com', 'International Book', '2020', '21', '12', 32, '01-99', 'dsadsadsdsds/dsadsad', 'hogwarts', NULL, '2025-02-11 08:25:35', '2025-02-11 08:44:04'),
 (581, 'dddddddddddddaa', 'dsadsada', 'Conference Proceeding', 'Article', 'aaaaaaaaaaaaaaaaaad', '[\"lego\"]', 'www.google.com', 'National Magazine', '2020', '21', '12', 32, '01-99', 'dsadsadsdsds/dsadsad', 'hogwarts', NULL, '2025-02-11 08:38:46', '2025-02-11 08:38:46'),
@@ -3903,7 +3743,8 @@ INSERT INTO `papers` (`id`, `paper_name`, `abstract`, `paper_type`, `paper_subty
 (589, 'Computational modeling of adherent cell growth in a hollow-fiber membrane bioreactor for large-scale 3-D bone tissue engineering', NULL, 'Journal', 'Article', 'Journal of Artificial Organs', NULL, 'https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=84868367533&origin=inward', NULL, '2012', '15', '3', 30, '250-265', '10.1007/s10047-012-0649-1', NULL, NULL, '2025-02-11 22:09:11', '2025-02-11 22:09:11'),
 (590, 'Modulatory effect of a complex fraction derived from colostrum on fibroblast contractibility and consequences on repair tissue', NULL, 'Journal', 'Article', 'International Wound Journal', NULL, 'https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=79955761109&origin=inward', NULL, '2011', '8', '3', 8, '280-290', '10.1111/j.1742-481X.2011.00783.x', NULL, NULL, '2025-02-11 22:10:22', '2025-02-11 22:10:22'),
 (591, 'Effect of Sterilization on Non-woven Polyethylene Terephthalate Fiber Structures for Vascular Grafts', NULL, 'Journal', 'Article', 'Macromolecular Bioscience', NULL, 'https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=78650742776&origin=inward', NULL, '2011', '11', '1', 17, '13-21', '10.1002/mabi.201000268', NULL, NULL, '2025-02-11 22:11:55', '2025-02-11 22:11:55'),
-(592, 'Facilitating tissue infiltration and angiogenesis in a tubular collagen scaffold', NULL, 'Journal', 'Article', 'Journal of Biomedical Materials Research - Part A', NULL, 'https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77950281410&origin=inward', NULL, '2010', '93', '2', 21, '615-624', '10.1002/jbm.a.32568', NULL, NULL, '2025-02-11 22:13:09', '2025-02-11 22:13:09');
+(592, 'Facilitating tissue infiltration and angiogenesis in a tubular collagen scaffold', NULL, 'Journal', 'Article', 'Journal of Biomedical Materials Research - Part A', NULL, 'https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=77950281410&origin=inward', NULL, '2010', '93', '2', 21, '615-624', '10.1002/jbm.a.32568', NULL, NULL, '2025-02-11 22:13:09', '2025-02-11 22:13:09'),
+(593, 'ds', 'ds', 'Journal', 'Book Chapter', 'dsa', '[\"ds\"]', 'https://www.example.com/research-paper', 'International Book', '2024', '32', '3', 15, '01-99', '10.1234/ijcs.2024.03203', 'National Research Council of Thailand', NULL, '2025-02-24 15:56:11', '2025-02-24 15:56:11');
 
 -- --------------------------------------------------------
 
@@ -4047,28 +3888,9 @@ INSERT INTO `research_groups` (`id`, `group_name_th`, `group_name_en`, `group_de
 (8, 'ห้องปฏิบัติการวิจัย ระบบอัจฉริยะและการเรียนรู้เครื่อง (MLIS)', 'Intelligent Systems and Machine Learning Research Laboratory (MLIS)', 'วัตถุประสงค์หลักของโครงการนี้คือการทำวิจัยและสร้างความรู้ใหม่เกี่ยวกับการเรียนรู้ของเครื่องและระบบอัจฉริยะตลอดจนการใช้งาน', 'The main purpose of this project is to conduct research and build new knowledge concerning machine learning and intelligent systems as well as their applications.', 'วัตถุประสงค์หลักของโครงการนี้คือการทำวิจัยและสร้างความรู้ใหม่เกี่ยวกับการเรียนรู้ของเครื่องและระบบอัจฉริยะตลอดจนการใช้งาน', 'The main purpose of this project is to conduct research and build new knowledge concerning machine learning and intelligent systems as well as their applications.', '1651386369.jpg', '2022-03-05 09:59:08', '2022-05-15 07:08:01'),
 (9, 'ห้องปฎิบัติการประมวลผลภาษาธรรมชาติและการประมวลผลด้านเสียง (NLSP)', 'Natural Language Processing and Sound Processing Laboratory (NLSP)', 'จุดมุ่งหมายหลักของโครงการนี้คือ การวิจัยเกี่ยวกับภาษาธรรมชาติและการประมวลผลเสียงพูดในระบบคอมพิวเตอร์ ระบบแทนสเลชันด้วยเครื่อง ระบบคอมพิวเตอร์สังเคราะห์เสียงพูดและการรู้จำเสียง การรู้จำอักขระและการค้นหาข้อมูล การสร้างและพัฒนาระบบการทำงานเพื่อบูรณาการทางธรรมชาติ การประมวลผลภาษาและคำพูดด้วยระบบงานทางธุรกิจและเพื่อสร้างผลงานทางวิชาการเกี่ยวกับการประมวลผลตามธรรมชาติ', 'The main aims of this project are to conduct research concerning natural language and speech processing in the computer system, Machine Tanslation system, Speech Synthesis and Speech Recognition computer system, Char- acter Recognition and information searching, construction and development of working system to integrate natural language and speech processing with business work system,and to create academic works on natural processing.', 'จุดมุ่งหมายหลักของโครงการนี้คือ การวิจัยเกี่ยวกับภาษาธรรมชาติและการประมวลผลเสียงพูดในระบบคอมพิวเตอร์ ระบบแทนสเลชันด้วยเครื่อง ระบบคอมพิวเตอร์สังเคราะห์เสียงพูดและการรู้จำเสียง การรู้จำอักขระและการค้นหาข้อมูล การสร้างและพัฒนาระบบการทำงานเพื่อบูรณาการทางธรรมชาติ การประมวลผลภาษาและคำพูดด้วยระบบงานทางธุรกิจและเพื่อสร้างผลงานทางวิชาการเกี่ยวกับการประมวลผลตามธรรมชาติ', 'The main aims of this project are to conduct research concerning natural language and speech processing in the computer system, Machine Tanslation system, Speech Synthesis and Speech Recognition computer system, Char- acter Recognition and information searching, construction and development of working system to integrate natural language and speech processing with business work system,and to create academic works on natural processing.', '1651386363.jpg', '2022-03-05 10:03:41', '2022-05-15 07:07:51'),
 (10, 'ปัญญาประยุกต์และการวิเคราะห์ข้อมูล (AIDA)', 'Applied Intelligence and Data Analytics (AIDA)', 'ห้องปฏิบัติการวิจัยนี้รวบรวมสาขาการวิจัยแบบสหวิทยาการ เช่น Data Science & Data Analytics, Data Mining, Text Mining, Opinion Mining, Business Intelligence, ERP System, IT Management, Semantic Web, Sentiment Analysis, Image Processing, Ubiquitous Learning, Blended Learning และ Bioinformatics.', 'This research lab brings together interdisciplinary research fields, such as, Data Science & Data Analytics, Data Mining, Text Mining, Opinion Mining, Business Intelligence, ERP System, IT Management, Semantic Web, Sentiment Analysis, Image Processing, Ubiquitous Learning, Blended Learning, and Bioinformatics.', 'ห้องปฏิบัติการวิจัยนี้รวบรวมสาขาการวิจัยแบบสหวิทยาการ เช่น Data Science & Data Analytics, Data Mining, Text Mining, Opinion Mining, Business Intelligence, ERP System, IT Management, Semantic Web, Sentiment Analysis, Image Processing, Ubiquitous Learning, Blended Learning และ Bioinformatics.', 'This research lab brings together interdisciplinary research fields, such as, Data Science & Data Analytics, Data Mining, Text Mining, Opinion Mining, Business Intelligence, ERP System, IT Management, Semantic Web, Sentiment Analysis, Image Processing, Ubiquitous Learning, Blended Learning, and Bioinformatics.', '1651386357.jpg', '2022-03-05 11:20:32', '2022-05-15 07:07:40'),
-(11, 'test333', 'test33', NULL, 'fdfdf', 'ดกดก', 'dsd', '1739181112.png', '2025-02-10 09:06:38', '2025-02-10 09:51:52'),
 (13, 't191', 't191', NULL, 'dsa', 'dsad', 'dsa', '1739364010.png', '2025-02-12 12:40:10', '2025-02-12 12:40:10'),
 (14, 'ttt', 'ttt', NULL, 'dsa', 'dsa', 'das', '1739364144.png', '2025-02-12 12:42:24', '2025-02-12 12:42:24'),
-(15, '999', '99', NULL, 'das', 'ds', 'dsa', '1739364572.png', '2025-02-12 12:49:32', '2025-02-12 12:49:32'),
-(16, 'sa', 'asd', NULL, 'da', 'dsa', 'das', NULL, '2025-02-12 14:23:31', '2025-02-12 14:23:31'),
-(17, 'yyy', 'yyy', NULL, 'ds', 'dsd', 'dsd', '1739373880.png', '2025-02-12 15:24:40', '2025-02-12 15:24:40'),
-(18, 'dsa', 'das', NULL, 'da', 'das', 'dsa', NULL, '2025-02-13 04:19:42', '2025-02-13 04:19:42');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `research_group_members`
---
-
-CREATE TABLE `research_group_members` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `research_group_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `role` tinyint(4) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(15, '999', '99', NULL, 'das', 'ds', 'dsa', '1739364572.png', '2025-02-12 12:49:32', '2025-02-12 12:49:32');
 
 -- --------------------------------------------------------
 
@@ -5124,9 +4946,10 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `fname_en`, `lname_e
 (151, 'pakamu@kku.ac.th', NULL, '$2y$10$4cWIeXPDrzOdprHYUoi0FuhPVnilKFBQav3GfnAWOe9Os6s/5ogD2', 'Pakarat', 'Musikawan', 'ภัคราช', 'มุสิกะวัน', 'Ph.D.', 'Lecturer', 'อาจารย์', 'Lecturer', 'อ.ดร.', 'นาย', 'Mr.', 'UIMG_202205196286008d384de.jpg', NULL, NULL, 1, NULL, '2022-05-19 07:01:45', '2022-05-19 08:32:13', 'user'),
 (152, 'yaniko@kku.ac.th', NULL, '$2y$10$gDmFes/xMxi33DFFKtc8lOUbOmLFLDr9HjzXev1905cQVPxqoDiDm', 'Yanika', 'Kongsorot', '-', '-', 'Ph.D.', 'Lecturer', 'อาจารย์', 'Lecturer', 'อ.ดร.', 'นาย', 'Mr.', 'UIMG_2022051962860eccccde5.jpg', NULL, NULL, 1, NULL, '2022-05-19 09:32:02', '2022-05-19 09:33:48', 'user'),
 (153, 'jonathan.teacher@gmail.com', NULL, '$2y$10$5FnsdiH8Bb2y.7djs2FIAOf.oKoZm0KkxBEzJFZavurA3weU16Fq.', 'jonathan_teacher', 'doillon', 'โจนาทาน_อาจารย์', 'ดัวยองd', 'Ph.D.', 'Professor', 'ศาสตราจารย์', 'Prof. Dr.', 'ศ.ดร.', 'นางสาว', 'Miss', 'UIMG_2025021067a8fba9a13f6.jpg', 1, NULL, 1, NULL, '2024-12-23 18:30:23', '2025-02-12 12:52:16', 'user'),
-(154, 'jonathan.student@gmail.com', NULL, '$2y$10$BrnUmNvX8ZKcV33Zw0A7KOywXVPF6KGwbckOdH/n.eGe.TyqKwaXi', 'jonathan_student', 'doillon', 'โจนาทาน_นักศึกษา', 'ดัวยอง', NULL, NULL, NULL, NULL, NULL, 'นางสาว', 'Miss', 'UIMG_2025021067a8fee275301.jpg', NULL, NULL, 1, NULL, '2024-12-24 09:30:21', '2025-02-09 19:15:46', 'user'),
+(154, 'jonathan.student@gmail.com', NULL, '$2y$10$BrnUmNvX8ZKcV33Zw0A7KOywXVPF6KGwbckOdH/n.eGe.TyqKwaXi', 'jonathan_student', 'doillon', 'โจนาทาน_นักศึกษา', 'ดัวยอง', NULL, NULL, NULL, NULL, NULL, 'นาย', 'Mr.', 'UIMG_2025021067a8fee275301.jpg', NULL, NULL, 1, NULL, '2024-12-24 09:30:21', '2025-02-24 15:59:31', 'user'),
 (155, 'jonathan.staff@gmail.com', NULL, '$2y$10$3db1ecM7l0GlgDVmdm3i8.jwzkq47fiGymwciZsSK4Xp9HoaEBgje', 'jonathan_staff', 'doillon', 'โจนาทาน_สตาฟ', 'ดัวยอง', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2025-01-05 10:17:47', '2025-01-05 10:17:47', 'user'),
-(157, 'jonathan.teacher1@gmail.com', NULL, '$2y$10$OKyvT5r9AuOI7kh/tnQZm.6CJeRNlDRd/bAyDRy8xXeSYGRT0B4qS', 'jonathan_teacher1', 'doillon', 'โจนาทาน_อาจารย์1', 'ดัวยอง', 'Ph.D.', 'Professor', 'ศาสตราจารย์', 'Prof. Dr.', 'ศ.ดร.', 'นาย', 'Mr.', NULL, 1, NULL, 6, NULL, '2025-02-12 12:44:41', '2025-02-12 12:52:35', 'user');
+(157, 'jonathan.teacher1@gmail.com', NULL, '$2y$10$OKyvT5r9AuOI7kh/tnQZm.6CJeRNlDRd/bAyDRy8xXeSYGRT0B4qS', 'jonathan_teacher1', 'doillon', 'โจนาทาน_อาจารย์1', 'ดัวยอง', 'Ph.D.', 'Professor', 'ศาสตราจารย์', 'Prof. Dr.', 'ศ.ดร.', 'นาย', 'Mr.', NULL, 1, NULL, 6, NULL, '2025-02-12 12:44:41', '2025-02-12 12:52:35', 'user'),
+(158, 'admin1@gmail.com', NULL, '$2y$10$MjGWaWIlvyiP2cHx/EKazeVo/rLZlGDe90K5BzfOOx2dDZbSqjeAq', 'admin1', 'admin1', 'admin1', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2025-02-24 16:06:03', '2025-02-24 16:06:03', 'user');
 
 -- --------------------------------------------------------
 
@@ -5205,7 +5028,6 @@ INSERT INTO `user_of_academicworks` (`user_id`, `author_type`, `academicwork_id`
 (10, 1, 73, 71),
 (21, 1, 74, 72),
 (16, 1, 75, 73),
-(154, NULL, 77, 75),
 (154, NULL, 78, 76);
 
 -- --------------------------------------------------------
@@ -6003,18 +5825,11 @@ INSERT INTO `work_of_research_groups` (`id`, `role`, `user_id`, `research_group_
 (114, 1, 15, 3),
 (115, 2, 5, 3),
 (116, 2, 11, 3),
-(121, 1, 153, 11),
-(122, 2, 154, 11),
 (124, 1, 153, 13),
 (125, 1, 153, 14),
 (126, 2, 154, 14),
 (127, 1, 157, 15),
-(128, 2, 153, 15),
-(129, 1, 153, 16),
-(130, 2, 157, 16),
-(131, 1, 153, 17),
-(132, 2, 157, 17),
-(133, 1, 153, 18);
+(128, 2, 153, 15);
 
 -- --------------------------------------------------------
 
@@ -6237,14 +6052,6 @@ ALTER TABLE `research_groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `research_group_members`
---
-ALTER TABLE `research_group_members`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `research_group_id` (`research_group_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `research_projects`
 --
 ALTER TABLE `research_projects`
@@ -6394,7 +6201,7 @@ ALTER TABLE `funds`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
+  MODIFY `log_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -6418,7 +6225,7 @@ ALTER TABLE `outsiders_work_of_project`
 -- AUTO_INCREMENT for table `papers`
 --
 ALTER TABLE `papers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=593;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=594;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -6436,13 +6243,7 @@ ALTER TABLE `programs`
 -- AUTO_INCREMENT for table `research_groups`
 --
 ALTER TABLE `research_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `research_group_members`
---
-ALTER TABLE `research_group_members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `research_projects`
@@ -6472,7 +6273,7 @@ ALTER TABLE `source_papers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `user_of_academicworks`
@@ -6490,7 +6291,7 @@ ALTER TABLE `user_papers`
 -- AUTO_INCREMENT for table `work_of_research_groups`
 --
 ALTER TABLE `work_of_research_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `work_of_research_projects`
@@ -6572,13 +6373,6 @@ ALTER TABLE `outsiders_work_of_project`
 ALTER TABLE `programs`
   ADD CONSTRAINT `department_id` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`),
   ADD CONSTRAINT `programs_degree_id_foreign` FOREIGN KEY (`degree_id`) REFERENCES `degrees` (`id`);
-
---
--- Constraints for table `research_group_members`
---
-ALTER TABLE `research_group_members`
-  ADD CONSTRAINT `research_group_members_ibfk_1` FOREIGN KEY (`research_group_id`) REFERENCES `research_groups` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `research_group_members_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `research_projects`
