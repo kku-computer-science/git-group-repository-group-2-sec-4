@@ -29,9 +29,14 @@ class LogHelper
     public static function logError($statusCode, $message = null)
     {
         try {
+            $user = Auth::user();
+            \Log::debug("LogHelper.php - Checking Auth::user(): " . json_encode($user));
+
             Log::create([
-                'user_id' => Auth::id(),
-                'action' => 'error',
+                'user_id' => $user?->id ?? null,
+                'user_name' => $user?->name ?? 'Unknown',
+                'user_email' => $user?->email ?? 'Unknown',
+                'action' => "HTTP $statusCode ",
                 'log_level' => 'ERROR',
                 'message' => "HTTP $statusCode: " . ($message ?? 'Unknown error'),
                 'ip_address' => Request::ip(),
