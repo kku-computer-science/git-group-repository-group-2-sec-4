@@ -25,5 +25,24 @@ class LogHelper
             \Log::error("Failed to insert log: " . $e->getMessage());
         }
     }
+    //ฟังก์ชันใหม่สำหรับบันทึก Error Log
+    public static function logError($statusCode, $message = null)
+    {
+        try {
+            Log::create([
+                'user_id' => Auth::id(),
+                'action' => 'error',
+                'log_level' => 'ERROR',
+                'message' => "HTTP $statusCode: " . ($message ?? 'Unknown error'),
+                'ip_address' => Request::ip(),
+                'related_table' => null,
+                'related_id' => null
+            ]);
+
+            \Log::error("Error logged: HTTP $statusCode - " . ($message ?? 'Unknown error'));
+        } catch (\Exception $e) {
+            \Log::error("Failed to insert error log: " . $e->getMessage());
+        }
+    }
 }
 
