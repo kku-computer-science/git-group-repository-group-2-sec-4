@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+
+use App\Helpers\LogHelper;
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
@@ -37,5 +40,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
+            $status = $exception->getStatusCode();
+
+            if (in_array($status, [403, 404, 419, 500])) {
+                LogHelper::logError($status, $exception->getMessage());
+            }
+        }
+
+        return parent::render($request, $exception);
     }
 }
