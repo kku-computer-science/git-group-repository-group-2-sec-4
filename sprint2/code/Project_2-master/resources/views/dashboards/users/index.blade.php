@@ -457,6 +457,7 @@
         <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
         <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js" defer></script>
         <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 flatpickr("#start_date", { dateFormat: "d/m/Y" });
