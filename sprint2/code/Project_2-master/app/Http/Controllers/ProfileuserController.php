@@ -33,6 +33,7 @@ class ProfileuserController extends Controller
         // รับค่าช่วงเวลาจาก Request (ค่าเริ่มต้น: "now")
         $timeRange = $request->input('time_range', 'now');
 
+
         // 🔹 กำหนดช่วงเวลาเริ่มต้น
         switch ($timeRange) {
             case '1h':
@@ -73,6 +74,7 @@ class ProfileuserController extends Controller
 
 
         // ดึง Top 5 Logs ตามช่วงเวลาที่เลือก
+
         $topLogs = Log::where('created_at', '>=', $startTime)
             ->selectRaw('action, log_level, COUNT(*) as count, MAX(created_at) as last_occurrence')
             ->groupBy('action', 'log_level')
@@ -82,10 +84,12 @@ class ProfileuserController extends Controller
 
 
         // ✅ System Logs ควรดึง **ทั้งหมด** และใช้ paginate()
+
         $logs = Log::with([
             'user' => function ($query) {
                 $query->select('id', 'fname_en', 'lname_en', 'email')->with('roles');
             }
+
         ])->orderByDesc('created_at')->paginate(10);
 
 
@@ -114,6 +118,7 @@ class ProfileuserController extends Controller
         }
         // 📌 แปลงข้อมูลให้เป็นรูปแบบที่ Chart.js ใช้ได้
         $logTimestamps = $logData->pluck('time'); // ดึงค่าเวลาตาม format ด้านบน
+
         $logCounts = [
             'totalLogs' => $logData->pluck('count'),
             'errors' => $logData->where('log_level', 'ERROR')->pluck('count'),
@@ -131,6 +136,7 @@ class ProfileuserController extends Controller
             'logs',
             'logTimestamps',
             'logCounts'
+
         ));
     }
 
@@ -344,6 +350,7 @@ class ProfileuserController extends Controller
             }
         }
     }
+
     public function searchLogs(Request $request)
     {
         $query = Log::query()->with('user');

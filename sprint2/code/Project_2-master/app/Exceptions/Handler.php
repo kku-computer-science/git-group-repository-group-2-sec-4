@@ -36,12 +36,14 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
     // ✅ เพิ่มฟังก์ชันตรวจสอบ static assets
     private function isStaticAsset($request)
     {
         $path = $request->path();
         return preg_match('/\.(css|js|jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot|ico)$/i', $path);
     }
+
 
     /**
      * Handle and log errors before rendering.
@@ -85,6 +87,7 @@ class Handler extends ExceptionHandler
             }
         }
         
+
         // ตรวจจับ Validation Error (422)
         if ($exception instanceof ValidationException) {
             LogHelper::logError(422, json_encode([
@@ -114,5 +117,4 @@ class Handler extends ExceptionHandler
 
         return parent::render($request, $exception);
     }
-    
 }

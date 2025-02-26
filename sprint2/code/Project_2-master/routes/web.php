@@ -147,6 +147,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/logs', [LogController::class, 'index'])->name('admin.logs');
     Route::get('/admin/logs/export', [LogController::class, 'exportCsv'])->name('admin.logs.exportCsv');
     Route::get('/admin/search-logs', [ProfileuserController::class, 'searchLogs'])->name('admin.searchLogs'); // ✅ Route สำหรับ AJAX Search
+
 });
 
 

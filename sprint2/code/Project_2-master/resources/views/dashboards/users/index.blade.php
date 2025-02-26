@@ -130,6 +130,7 @@
             box-shadow: none;
             border: 1px solid rgb(85, 85, 85);
         }
+<<<<<<< HEAD
 
         .log-level {
             font-weight: bold;
@@ -147,6 +148,8 @@
         .log-level.info {
             color: green;
         }
+=======
+>>>>>>> origin/main
     </style>
     <script>
         $(document).ready(function () {
@@ -175,6 +178,7 @@
     <h4>สวัสดี {{ Auth::user()->position_th }} {{ Auth::user()->fname_th }} {{ Auth::user()->lname_th }}</h4>
 
     @if($isAdmin)
+<<<<<<< HEAD
         <!--Select Time Range มาด้านบนสุด -->
         <div class="row align-items-center d-flex justify-content-between">
             <!-- ✅ คอลัมน์ซ้ายสุดสำหรับ Last Updated -->
@@ -214,6 +218,8 @@
                 document.getElementById("lastUpdated").innerText = "Last updated: " + formattedDate;
             }
         </script>
+=======
+>>>>>>> origin/main
         <div class="row mt-4">
             <!-- Total Logs -->
             <div class="col-md-3">
@@ -269,14 +275,23 @@
         </div>
 
         <!-- Chart.js -->
+<<<<<<< HEAD
         <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+=======
+        <script src="vendor/chart.js/Chart.min.js"></script>
+>>>>>>> origin/main
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 let ctx = document.getElementById("myAreaChart").getContext("2d");
 
+<<<<<<< HEAD
                 // 📌 ดึงข้อมูลจาก Laravel Blade
                 let labels = {!! json_encode($logTimestamps) !!};
+=======
+                // ดึงข้อมูลเวลาและจำนวน log จาก Laravel Blade
+                let labels = {!! json_encode($logTimestamps) !!}; // ข้อมูลเวลา (X-Axis)
+>>>>>>> origin/main
                 let chartData = {
                     totalLogs: {!! json_encode($logCounts['totalLogs']) !!},
                     errors: {!! json_encode($logCounts['errors']) !!},
@@ -284,6 +299,7 @@
                     info: {!! json_encode($logCounts['info']) !!}
                 };
 
+<<<<<<< HEAD
                 // 🛠 กำหนดค่า Title ของแกน X ให้เปลี่ยนอัตโนมัติ
                 let xAxisLabel = "{{ in_array($timeRange, ['1h', '2h', '6h', '12h']) ? 'Time (HH:mm)' : (in_array($timeRange, ['24h', '3d']) ? 'Date & Hour (YYYY-MM-DD HH:00)' : 'Date (YYYY-MM-DD)') }}";
 
@@ -294,27 +310,44 @@
                         labels: labels, // **ใช้ค่าเวลาที่ปรับแล้ว**
                         datasets: [{
                             label: "Total Logs",
+=======
+                let myAreaChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels, // **ใช้ค่าเวลาเป็นแกน X**
+                        datasets: [{
+                            label: "Log Count",
+>>>>>>> origin/main
                             backgroundColor: "rgba(78, 115, 223, 0.1)",
                             borderColor: "#4e73df",
                             pointBackgroundColor: "#4e73df",
                             pointBorderColor: "#fff",
                             pointHoverBackgroundColor: "#fff",
                             pointHoverBorderColor: "#4e73df",
+<<<<<<< HEAD
                             data: chartData.totalLogs
+=======
+                            data: chartData.totalLogs // Default: แสดง Total Logs
+>>>>>>> origin/main
                         }]
                     },
                     options: {
                         responsive: true,
                         scales: {
+<<<<<<< HEAD
                             x: {
                                 beginAtZero: false,
                                 title: { display: true, text: xAxisLabel }
                             },
+=======
+                            x: { beginAtZero: false },
+>>>>>>> origin/main
                             y: { beginAtZero: true }
                         }
                     }
                 });
 
+<<<<<<< HEAD
                 // ✅ เมื่อกดการ์ดให้เปลี่ยน dataset ใน Chart
                 document.querySelectorAll(".log-filter").forEach(card => {
                     card.addEventListener("click", function () {
@@ -329,6 +362,12 @@
                         // 🎯 อัปเดต dataset ใน Chart
                         myAreaChart.data.datasets[0].data = chartData[type];
                         myAreaChart.data.datasets[0].label = labelText[type];
+=======
+                document.querySelectorAll(".log-filter").forEach(card => {
+                    card.addEventListener("click", function () {
+                        let type = this.getAttribute("data-type");
+                        myAreaChart.data.datasets[0].data = chartData[type]; // เปลี่ยนข้อมูลตามประเภทที่เลือก
+>>>>>>> origin/main
                         myAreaChart.update();
                     });
                 });
@@ -336,13 +375,32 @@
         </script>
 
         <!-- Top 5 Most Frequent Logs Table -->
+<<<<<<< HEAD
         <div class="card shadow mb-4" style="margin-top: 30px;">
+=======
+        <div class="card row" style="padding: 16px; margin-top: 30px;" >
+>>>>>>> origin/main
             <div class="card-body">
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <h5>Top 5 Most Frequent Logs</h5>
                     </div>
+<<<<<<< HEAD
 
+=======
+                    <div class="col-md-6 text-right">
+                        <form method="GET" action="{{ route('dashboard') }}">
+                            <label for="time_range">Select Time Range:</label>
+                            <select name="time_range" id="time_range" class="form-control" onchange="this.form.submit()">
+                                <option value="now" {{ $timeRange == 'now' ? 'selected' : '' }}>Now</option>
+                                <option value="2h" {{ $timeRange == '2h' ? 'selected' : '' }}>Last 2 Hours</option>
+                                <option value="24h" {{ $timeRange == '24h' ? 'selected' : '' }}>Last 24 Hours</option>
+                                <option value="7d" {{ $timeRange == '7d' ? 'selected' : '' }}>Last 7 Days</option>
+                                <option value="30d" {{ $timeRange == '30d' ? 'selected' : '' }}>Last 30 Days</option>
+                            </select>
+                        </form>
+                    </div>
+>>>>>>> origin/main
                 </div>
 
                 <div class="table-responsive mt-3">
@@ -360,8 +418,16 @@
                                 <tr>
                                     <td>{{ $log->action }}</td>
                                     <td><strong>{{ $log->count }}</strong></td>
+<<<<<<< HEAD
                                     <td class="log-level {{ strtolower($log->log_level) }}">
                                         {{ strtoupper($log->log_level) }}
+=======
+                                    <td>
+                                        <span
+                                            class="badge badge-{{ $log->log_level == 'ERROR' ? 'danger' : ($log->log_level == 'WARNING' ? 'warning' : 'info') }}">
+                                            {{ $log->log_level }}
+                                        </span>
+>>>>>>> origin/main
                                     </td>
                                     <td>{{ \Carbon\Carbon::parse($log->last_occurrence)->diffForHumans() }}</td>
                                 </tr>
@@ -374,12 +440,17 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <div class="card" style="padding: 16px; margin-top: 30px;">
+=======
+        <div class="card" style="padding: 16px; margin-top: 30px;" >
+>>>>>>> origin/main
             <div class="card-body">
                 <h4 class="card-title">System Logs</h4>
                 <!-- Advanced Search Form -->
                 <!-- ฟอร์มค้นหาหลัก -->
                 <!-- ✅ FORM ค้นหาหลัก -->
+<<<<<<< HEAD
                 <!-- ✅ FORM ค้นหา Logs -->
                 <form method="GET" id="searchForm">
                     <div class="row g-3 mt-2">
@@ -388,22 +459,48 @@
                         </div>
                         <div class="col-md-3">
                             <input type="text" name="user_email" class="form-control" placeholder="User Email">
+=======
+                <form method="GET" action="{{ route('admin.logs') }}" id="searchForm">
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-3">
+                            <input type="text" name="user_name" class="form-control" placeholder="User Name"
+                                value="{{ request('user_name') }}">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="user_email" class="form-control" placeholder="User Email"
+                                value="{{ request('user_email') }}">
+>>>>>>> origin/main
                         </div>
                         <div class="col-md-3">
                             <select name="log_level" class="form-control">
                                 <option value="">-- Log Level --</option>
+<<<<<<< HEAD
                                 <option value="INFO">INFO</option>
                                 <option value="WARNING">WARNING</option>
                                 <option value="ERROR">ERROR</option>
+=======
+                                <option value="INFO" {{ request('log_level') == 'INFO' ? 'selected' : '' }}>INFO</option>
+                                <option value="WARNING" {{ request('log_level') == 'WARNING' ? 'selected' : '' }}>WARNING
+                                </option>
+                                <option value="ERROR" {{ request('log_level') == 'ERROR' ? 'selected' : '' }}>ERROR</option>
+>>>>>>> origin/main
                             </select>
                         </div>
                         <div class="col-md-3 d-flex">
                             <button type="submit" class="btn btn-primary">Search Logs</button>
+<<<<<<< HEAD
                             <!-- <a href="{{ route('admin.logs.exportCsv') }}" class="btn btn-warning" style="margin-left: 2px;">Export CSV</a> -->
                         </div>
                     </div>
 
                     <!-- ✅ Advanced Filters -->
+=======
+                            <!-- <button type="button" class="btn btn-danger ml-2" id="resetBtn">Reset</button> -->
+                            <a href="{{ route('admin.logs.exportCsv') }}" class="btn btn-warning">Export CSV</a>
+                        </div>
+                    </div>
+
+>>>>>>> origin/main
                     <div class="mt-3">
                         <a data-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" class="advanced">
                             Advanced Filters <i class="fa fa-angle-down"></i>
@@ -413,6 +510,7 @@
                             <div class="card card-body">
                                 <div class="row">
                                     <div class="col-md-3">
+<<<<<<< HEAD
                                         <input type="text" name="action" class="form-control" placeholder="Action">
                                     </div>
                                     <div class="col-md-3">
@@ -424,6 +522,29 @@
                                     </div>
                                     <div class="col-md-3">
                                         <input type="text" name="end_date" id="end_date" class="form-control datepicker"
+=======
+                                        <input type="text" name="action" class="form-control" placeholder="Action"
+                                            value="{{ request('action') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="related_table" class="form-control" placeholder="Related Table"
+                                            value="{{ request('related_table') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="related_id" class="form-control" placeholder="Related ID"
+                                            value="{{ request('related_id') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="ip_address" class="form-control" placeholder="IP Address"
+                                            value="{{ request('ip_address') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="start_date" id="start_date" class="form-control"
+                                            placeholder="Start Date (DD/MM/YYYY)" value="{{ request('start_date') }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" name="end_date" id="end_date" class="form-control"
+>>>>>>> origin/main
                                             placeholder="End Date (DD/MM/YYYY)" value="{{ request('end_date') }}">
                                     </div>
                                 </div>
@@ -431,6 +552,7 @@
                         </div>
                     </div>
                 </form>
+<<<<<<< HEAD
                 <!-- ✅ Table แสดง Logs -->
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -530,11 +652,85 @@
             <div class="bottom-scroll">
                 <div class="scroll-div"></div>
             </div>
+=======
+
+                <div class="table-responsive">
+                    <!-- Scroll Bar ด้านบน -->
+                    <div class="top-scroll">
+                        <div class="scroll-div"></div>
+                    </div>
+
+                    <!-- ตาราง -->
+                    <div class="scroll-container">
+                        <table id="example1" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User ID</th>
+                                    <th>User Name</th>
+                                    <th>User Email</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                    <th>Log Level</th>
+                                    <th>Message</th>
+                                    <!-- <th>Related Table</th>
+                                                                                                                    <th>Related ID</th> -->
+                                    <th>IP Address</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($logs as $log)
+                                    <tr>
+                                        <td>{{ $log->log_id }}</td>
+                                        <td>{{ $log->user_id ?? 'Guest' }}</td>
+                                        <td>{{ $log->user ? $log->user->fname_en . ' ' . $log->user->lname_en : 'Unknown' }}
+                                        </td>
+                                        <td>{{ $log->user ? $log->user->email : 'Unknown' }}</td>
+                                        <td>
+                                            @if($log->user && $log->user->roles->count())
+                                                {{ $log->user->roles->first()->name }}
+                                            @else
+                                                Unknown
+                                            @endif
+                                        </td>
+                                        <td>{{ $log->action }}</td>
+                                        <td class="log-level {{ strtolower($log->log_level) }}">
+                                            {{ $log->log_level }}
+                                        </td>
+                                        <td style="width: 350px; word-wrap: break-word; white-space: normal;">
+                                            {{ $log->message }}
+                                        </td>
+                                        <!-- <td>{{ $log->related_table }}</td>
+                                                                                                                                                    <td>{{ $log->related_id }}</td> -->
+                                        <td>{{ $log->ip_address }}</td>
+                                        <td>{{ $log->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Scroll Bar ด้านล่าง -->
+                    <div class="bottom-scroll">
+                        <div class="scroll-div"></div>
+                    </div>
+                </div>
+                @if($logs instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                    {{ $logs->links() }} <!-- ✅ แสดง pagination เฉพาะกรณีที่ใช้ paginate() -->
+                @endif
+            </div>
+
+>>>>>>> origin/main
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
         <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js" defer></script>
         <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js" defer></script>
+<<<<<<< HEAD
+=======
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+>>>>>>> origin/main
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 flatpickr("#start_date", { dateFormat: "d/m/Y" });
@@ -580,4 +776,8 @@
         </script>
     @endif
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> origin/main
