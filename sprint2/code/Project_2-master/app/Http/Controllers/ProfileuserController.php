@@ -33,25 +33,46 @@ class ProfileuserController extends Controller
         // รับค่าช่วงเวลาจาก Request (ค่าเริ่มต้น: "now")
         $timeRange = $request->input('time_range', 'now');
 
-        // แปลงช่วงเวลาเป็น timestamp
+        // 🔹 กำหนดช่วงเวลาเริ่มต้น
         switch ($timeRange) {
+            case '1h':
+                $startTime = Carbon::now()->subHour();
+                break;
             case '2h':
                 $startTime = Carbon::now()->subHours(2);
+                break;
+            case '6h':
+                $startTime = Carbon::now()->subHours(6);
+                break;
+            case '12h':
+                $startTime = Carbon::now()->subHours(12);
                 break;
             case '24h':
                 $startTime = Carbon::now()->subHours(24);
                 break;
+            case '3d':
+                $startTime = Carbon::now()->subDays(3);
+                break;
             case '7d':
                 $startTime = Carbon::now()->subDays(7);
+                break;
+            case '14d':
+                $startTime = Carbon::now()->subDays(14);
                 break;
             case '30d':
                 $startTime = Carbon::now()->subDays(30);
                 break;
             default:
-                $startTime = Carbon::now()->subHours(1); // Default: 1 ชั่วโมงล่าสุด
+                $startTime = Carbon::now()->subHours(1); // ค่าเริ่มต้น: 1 ชั่วโมง
         }
+        // นับจำนวน Logs ทั้งหมดตามช่วงเวลา
+        $logsCount = Log::where('created_at', '>=', $startTime)->count();
+        $errorLogsCount = Log::where('log_level', 'ERROR')->where('created_at', '>=', $startTime)->count();
+        $warningLogsCount = Log::where('log_level', 'WARNING')->where('created_at', '>=', $startTime)->count();
+        $infoLogsCount = Log::where('log_level', 'INFO')->where('created_at', '>=', $startTime)->count();
 
-        // ดึง Top 5 Logs ที่เกิดซ้ำมากที่สุดในช่วงเวลาที่เลือก
+
+        // ดึง Top 5 Logs ตามช่วงเวลาที่เลือก
         $topLogs = Log::where('created_at', '>=', $startTime)
             ->selectRaw('action, log_level, COUNT(*) as count, MAX(created_at) as last_occurrence')
             ->groupBy('action', 'log_level')
@@ -59,24 +80,40 @@ class ProfileuserController extends Controller
             ->limit(5)
             ->get();
 
-        // **🔹 ดึง Logs ล่าสุด 50 รายการ พร้อมดึงข้อมูล Role ของ User**
+
+        // ✅ System Logs ควรดึง **ทั้งหมด** และใช้ paginate()
         $logs = Log::with([
             'user' => function ($query) {
                 $query->select('id', 'fname_en', 'lname_en', 'email')->with('roles');
             }
-        ])
-            ->orderByDesc('created_at')
-            ->paginate(10); // ✅ ใช้ paginate() เพื่อรองรับ pagination
+        ])->orderByDesc('created_at')->paginate(10);
 
 
-        // 📌 ดึง Logs พร้อมเวลา (Timestamp) และจำนวน Log ในแต่ละประเภท
-        $logData = Log::selectRaw('DATE(created_at) as date, log_level, COUNT(*) as count')
-            ->groupBy('date', 'log_level')
-            ->orderBy('date', 'ASC')
-            ->get();
-
+        // 📌 ดึง Logs พร้อมเวลา (Timestamp) และจำนวน Log ในแต่ละช่วงเวลา
+        if ($timeRange == '1h' || $timeRange == '2h' || $timeRange == '6h' || $timeRange == '12h') {
+            // ⏳ ถ้าช่วงเวลาสั้นกว่า 24 ชม. → ใช้เวลาแบบ HH:mm
+            $logData = Log::where('created_at', '>=', $startTime)
+                ->selectRaw("DATE_FORMAT(created_at, '%H:%i') as time, log_level, COUNT(*) as count")
+                ->groupBy('time', 'log_level')
+                ->orderBy('time', 'ASC')
+                ->get();
+        } elseif ($timeRange == '24h' || $timeRange == '3d') {
+            // 🕒 ถ้าช่วงเวลาเป็น 24 ชั่วโมง - 3 วัน → ใช้เวลาแบบ YYYY-MM-DD HH:00 (ชั่วโมงอย่างเดียว)
+            $logData = Log::where('created_at', '>=', $startTime)
+                ->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00') as time, log_level, COUNT(*) as count")
+                ->groupBy('time', 'log_level')
+                ->orderBy('time', 'ASC')
+                ->get();
+        } else {
+            // 📅 ถ้าช่วงเวลามากกว่า 7 วัน → แสดงเป็น "วัน" เท่านั้น (YYYY-MM-DD)
+            $logData = Log::where('created_at', '>=', $startTime)
+                ->selectRaw("DATE_FORMAT(created_at, '%Y-%m-%d') as time, log_level, COUNT(*) as count")
+                ->groupBy('time', 'log_level')
+                ->orderBy('time', 'ASC')
+                ->get();
+        }
         // 📌 แปลงข้อมูลให้เป็นรูปแบบที่ Chart.js ใช้ได้
-        $logTimestamps = $logData->pluck('date'); // ดึงวันที่ของ Log
+        $logTimestamps = $logData->pluck('time'); // ดึงค่าเวลาตาม format ด้านบน
         $logCounts = [
             'totalLogs' => $logData->pluck('count'),
             'errors' => $logData->where('log_level', 'ERROR')->pluck('count'),
@@ -92,7 +129,8 @@ class ProfileuserController extends Controller
             'topLogs',
             'timeRange',
             'logs',
-            'logTimestamps', 'logCounts'
+            'logTimestamps',
+            'logCounts'
         ));
     }
 
@@ -305,5 +343,60 @@ class ProfileuserController extends Controller
                 return response()->json(['status' => 1, 'msg' => 'Your password has been changed successfully']);
             }
         }
+    }
+    public function searchLogs(Request $request)
+    {
+        $query = Log::query()->with('user');
+
+        // 🔍 Advanced Search Filters
+        if ($request->filled('user_name')) {
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('fname_en', 'LIKE', "%{$request->user_name}%")
+                    ->orWhere('lname_en', 'LIKE', "%{$request->user_name}%");
+            });
+        }
+
+        if ($request->filled('user_email')) {
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('email', 'LIKE', "%{$request->user_email}%");
+            });
+        }
+
+        if ($request->filled('log_level')) {
+            $query->where('log_level', $request->log_level);
+        }
+
+        if ($request->filled('action')) {
+            $query->where('action', 'LIKE', "%{$request->action}%");
+        }
+
+        if ($request->filled('ip_address')) {
+            $query->where('ip_address', 'LIKE', "%{$request->ip_address}%");
+        }
+
+        // 🕒 ✅ **แก้ปัญหาค้นหาตามเวลา**
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            try {
+                // 🛠 แปลงรูปแบบวันที่จาก `d/m/Y` → `Y-m-d H:i:s`
+                $start = Carbon::createFromFormat('d/m/Y', $request->start_date)->startOfDay();
+                $end = Carbon::createFromFormat('d/m/Y', $request->end_date)->endOfDay();
+
+                $query->whereBetween('created_at', [$start, $end]);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Invalid date format'], 400);
+            }
+        }
+
+        // ✅ รองรับ AJAX Pagination
+        $logs = $query->orderByDesc('created_at')->paginate(10);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'tableData' => view('dashboards.users.logs_table', compact('logs'))->render(),
+                'pagination' => $logs->links()->render()
+            ]);
+        }
+
+        return view('dashboards.users.index', compact('logs'));
     }
 }
