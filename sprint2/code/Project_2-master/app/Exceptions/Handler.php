@@ -8,8 +8,9 @@ use Throwable;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Session\TokenMismatchException; // ✅ เพิ่ม TokenMismatchException
-
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class Handler extends ExceptionHandler
 {
     /**
@@ -41,13 +42,35 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        //ตรวจจับ HTTP 4xx Error ทุกประเภท
+        \Log::debug("Handler.php - Checking if session is started: " . (session()->isStarted() ? 'YES' : 'NO'));
+        \Log::debug("Handler.php - Checking Auth::check(): " . (Auth::check() ? 'Authenticated' : 'Not Authenticated'));
+
+        $user = Auth::user();
+
+        if (!$user) {
+            \Log::debug("Handler.php - No authenticated user found.");
+        } else {
+            \Log::debug("Handler.php - Authenticated user: " . json_encode([
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ]));
+        }
+
+        $userId = $user?->id ?? null;
+        $userName = $user?->name ?? 'Unknown';
+        $userEmail = $user?->email ?? 'Unknown';
+
+        // ตรวจจับ HTTP 4xx Error ทุกประเภท
         if ($exception instanceof HttpException) {
             $status = $exception->getStatusCode();
 
-            //ตรวจสอบว่าเป็น 4xx หรือไม่
+            // ตรวจสอบว่าเป็น 4xx หรือไม่
             if ($status >= 400 && $status < 500) {
                 LogHelper::logError($status, json_encode([
+                    'user_id' => $userId, // ดึง User ID
+                    'user_name' => $userName, // ดึงชื่อ
+                    'user_email' => $userEmail, // ดึงอีเมล
                     'message' => $exception->getMessage(),
                     'url' => $request->fullUrl(),
                     'method' => $request->method(),
@@ -56,9 +79,12 @@ class Handler extends ExceptionHandler
             }
         }
 
-        //ตรวจจับ Validation Error (422)
+        // ตรวจจับ Validation Error (422)
         if ($exception instanceof ValidationException) {
             LogHelper::logError(422, json_encode([
+                'user_id' => $userId, // ดึง User ID
+                'user_name' => $userName, // ดึงชื่อ
+                'user_email' => $userEmail, // ดึงอีเมล
                 'message' => 'Validation failed',
                 'errors' => $exception->errors(),
                 'url' => $request->fullUrl(),
@@ -67,9 +93,12 @@ class Handler extends ExceptionHandler
             ]));
         }
 
-        //ตรวจจับ Error 419 (CSRF Token Expired)
+        // ตรวจจับ Error 419 (CSRF Token Expired)
         if ($exception instanceof TokenMismatchException) {
             LogHelper::logError(419, json_encode([
+                'user_id' => $userId, // ดึง User ID
+                'user_name' => $userName, // ดึงชื่อ
+                'user_email' => $userEmail, // ดึงอีเมล
                 'message' => 'CSRF Token Mismatch',
                 'url' => $request->fullUrl(),
                 'method' => $request->method(),

@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-
+use App\Models\Log;
 use App\Helpers\LogHelper;
+use Illuminate\Support\Carbon;
 class ProfileuserController extends Controller
 {
     public function __construct()
@@ -16,15 +17,83 @@ class ProfileuserController extends Controller
         $this->middleware('auth');
     }
 
-    function index()
+    public function index(Request $request)
     {
-
-        //return view('dashboards.admins.index');
-        $users = User::get();
         $user = auth()->user();
-        //$user->givePermissionTo('readpaper');
-        //return view('home');
-        return view('dashboards.users.index', compact('users'));
+        $isAdmin = $user->hasRole('admin');
+
+        // ดึงจำนวน Logs ทั้งหมด
+        $logsCount = Log::count();
+
+        // ดึงจำนวน Logs แยกประเภท (Error, Warning, Info)
+        $errorLogsCount = Log::where('log_level', 'ERROR')->count();
+        $warningLogsCount = Log::where('log_level', 'WARNING')->count();
+        $infoLogsCount = Log::where('log_level', 'INFO')->count();
+
+        // รับค่าช่วงเวลาจาก Request (ค่าเริ่มต้น: "now")
+        $timeRange = $request->input('time_range', 'now');
+
+        // แปลงช่วงเวลาเป็น timestamp
+        switch ($timeRange) {
+            case '2h':
+                $startTime = Carbon::now()->subHours(2);
+                break;
+            case '24h':
+                $startTime = Carbon::now()->subHours(24);
+                break;
+            case '7d':
+                $startTime = Carbon::now()->subDays(7);
+                break;
+            case '30d':
+                $startTime = Carbon::now()->subDays(30);
+                break;
+            default:
+                $startTime = Carbon::now()->subHours(1); // Default: 1 ชั่วโมงล่าสุด
+        }
+
+        // ดึง Top 5 Logs ที่เกิดซ้ำมากที่สุดในช่วงเวลาที่เลือก
+        $topLogs = Log::where('created_at', '>=', $startTime)
+            ->selectRaw('action, log_level, COUNT(*) as count, MAX(created_at) as last_occurrence')
+            ->groupBy('action', 'log_level')
+            ->orderByDesc('count')
+            ->limit(5)
+            ->get();
+
+        // **🔹 ดึง Logs ล่าสุด 50 รายการ พร้อมดึงข้อมูล Role ของ User**
+        $logs = Log::with([
+            'user' => function ($query) {
+                $query->select('id', 'fname_en', 'lname_en', 'email')->with('roles');
+            }
+        ])
+            ->orderByDesc('created_at')
+            ->paginate(10); // ✅ ใช้ paginate() เพื่อรองรับ pagination
+
+
+        // 📌 ดึง Logs พร้อมเวลา (Timestamp) และจำนวน Log ในแต่ละประเภท
+        $logData = Log::selectRaw('DATE(created_at) as date, log_level, COUNT(*) as count')
+            ->groupBy('date', 'log_level')
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        // 📌 แปลงข้อมูลให้เป็นรูปแบบที่ Chart.js ใช้ได้
+        $logTimestamps = $logData->pluck('date'); // ดึงวันที่ของ Log
+        $logCounts = [
+            'totalLogs' => $logData->pluck('count'),
+            'errors' => $logData->where('log_level', 'ERROR')->pluck('count'),
+            'warnings' => $logData->where('log_level', 'WARNING')->pluck('count'),
+            'info' => $logData->where('log_level', 'INFO')->pluck('count'),
+        ];
+        return view('dashboards.users.index', compact(
+            'logsCount',
+            'isAdmin',
+            'errorLogsCount',
+            'warningLogsCount',
+            'infoLogsCount',
+            'topLogs',
+            'timeRange',
+            'logs',
+            'logTimestamps', 'logCounts'
+        ));
     }
 
     function profile()
