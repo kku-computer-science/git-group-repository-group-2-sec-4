@@ -100,7 +100,7 @@ Route::get('/callscopus/{id}', [App\Http\Controllers\ScopuscallController::class
 
 Route::group(['middleware' => ['isAdmin', 'auth', 'PreventBackHistory']], function () {
     //Route::post('change-profile-picture',[ProfileuserController::class,'updatePicture'])->name('adminPictureUpdate');
-    
+
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
@@ -146,7 +146,8 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/logs', [LogController::class, 'index'])->name('admin.logs');
     Route::get('/admin/logs/export', [LogController::class, 'exportCsv'])->name('admin.logs.exportCsv');
-    
+    Route::get('/admin/search-logs', [ProfileuserController::class, 'searchLogs'])->name('admin.searchLogs'); // ✅ Route สำหรับ AJAX Search
+
 });
 
 

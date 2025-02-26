@@ -22,6 +22,10 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+<<<<<<< HEAD
+        "chart.js": "^4.4.8",
+=======
+>>>>>>> origin/main
         "flag-icon-css": "^4.1.7"
     }
 }
