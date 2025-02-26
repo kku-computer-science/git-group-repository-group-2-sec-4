@@ -21,11 +21,11 @@
 ## วิธีการใช้งานสำหรับผู้ดูแลระบบ
 ### คลิกที่ปุ่ม login ในหน้า [homepage](https://cs040268.cpkkuhost.com/)
 
-![homepage](img/homepage.png)
+![homepage](Img/homepage.png)
 
 1. ใส่ **username** และ **password** ด้วยบัญชีผู้ดูแลระบบ
 
-![loginpage](img/loginpage.png)
+![loginpage](Img/loginpage.png)
 
 2. หลังจาก login สำเร็จจะมายังหน้าแดชบอร์ด
 3. แดชบอร์ดจะแสดงข้อมูลสำหรับ บันทึกกิจกรรมของผู้ใช้ บันทึกข้อผิดพลาด และบันทึกข้อมูลระบบที่สำคัญ
@@ -48,11 +48,11 @@ This is a user manual for Sprint#2 for admin.
 ## How to Use for Admin
 #### Clink login button on [homepage](https://cs040268.cpkkuhost.com/)
 
-![homepage](img/homepage.png)
+![homepage](Img/homepage.png)
 
 1. Enter **username** and **password** with an Admin account.
 
-![loginpage](img/loginpage.png)
+![loginpage](Img/loginpage.png)
 
 2. After successful login, you will be redirected to the Dashboard.
 3. The dashboard will display information for the **user's activity log**, **error log**, and **important system information log**.
