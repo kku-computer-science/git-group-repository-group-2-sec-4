@@ -21,11 +21,11 @@
 ## วิธีการใช้งานสำหรับ Admin
 ### คลิกที่ปุ่ม login ในหน้า [homepage](https://cs040268.cpkkuhost.com/)
 
-![homepage]img/homepage)
+![homepage](img/homepage)
 
 1. ใส่ **username** และ **password** ด้วย Admin account
 
-![loginpage]img/loginpage)
+![loginpage](img/loginpage)
 
 2. หลังจาก login สำเร็จจะมายังหน้า Dashboard
 3. Dashboard จะแสดงข้อมูลสำหรับ บันทึกกิจกรรมของผู้ใช้ บันทึกข้อผิดพลาด และบันทึกข้อมูลระบบที่สำคัญ
