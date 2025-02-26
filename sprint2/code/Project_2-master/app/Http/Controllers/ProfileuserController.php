@@ -59,6 +59,30 @@ class ProfileuserController extends Controller
             ->limit(5)
             ->get();
 
+        // **🔹 ดึง Logs ล่าสุด 50 รายการ พร้อมดึงข้อมูล Role ของ User**
+        $logs = Log::with([
+            'user' => function ($query) {
+                $query->select('id', 'fname_en', 'lname_en', 'email')->with('roles');
+            }
+        ])
+            ->orderByDesc('created_at')
+            ->paginate(10); // ✅ ใช้ paginate() เพื่อรองรับ pagination
+
+
+        // 📌 ดึง Logs พร้อมเวลา (Timestamp) และจำนวน Log ในแต่ละประเภท
+        $logData = Log::selectRaw('DATE(created_at) as date, log_level, COUNT(*) as count')
+            ->groupBy('date', 'log_level')
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        // 📌 แปลงข้อมูลให้เป็นรูปแบบที่ Chart.js ใช้ได้
+        $logTimestamps = $logData->pluck('date'); // ดึงวันที่ของ Log
+        $logCounts = [
+            'totalLogs' => $logData->pluck('count'),
+            'errors' => $logData->where('log_level', 'ERROR')->pluck('count'),
+            'warnings' => $logData->where('log_level', 'WARNING')->pluck('count'),
+            'info' => $logData->where('log_level', 'INFO')->pluck('count'),
+        ];
         return view('dashboards.users.index', compact(
             'logsCount',
             'isAdmin',
@@ -66,7 +90,9 @@ class ProfileuserController extends Controller
             'warningLogsCount',
             'infoLogsCount',
             'topLogs',
-            'timeRange'
+            'timeRange',
+            'logs',
+            'logTimestamps', 'logCounts'
         ));
     }
 
