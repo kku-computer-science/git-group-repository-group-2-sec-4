@@ -399,7 +399,7 @@
                         </div>
                         <div class="col-md-3 d-flex">
                             <button type="submit" class="btn btn-primary">Search Logs</button>
-                            <a href="{{ route('admin.logs.exportCsv') }}" class="btn btn-warning" style="margin-left: 2px;">Export CSV</a>
+                            <!-- <a href="{{ route('admin.logs.exportCsv') }}" class="btn btn-warning" style="margin-left: 2px;">Export CSV</a> -->
                         </div>
                     </div>
 
