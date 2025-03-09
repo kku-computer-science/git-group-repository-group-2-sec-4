@@ -2,6 +2,74 @@
 @section('title', 'Dashboard')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            // ✅ ใช้ Flatpickr กับ Datepicker
+            flatpickr("#start_date", { dateFormat: "d/m/Y" });
+            flatpickr("#end_date", { dateFormat: "d/m/Y" });
+
+            // ✅ รีเซ็ตค่าการค้นหา
+            $("#resetBtn").on("click", function () {
+                window.location.href = "{{ route('admin.logs') }}";
+            });
+
+            // ✅ AJAX ค้นหา Logs
+            $("#searchForm").submit(function (e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('admin.searchLogs') }}",
+                    type: "GET",
+                    data: formData,
+                    success: function (response) {
+                        $("#logsTableBody").html(response.tableData);
+                        $(".pagination-links").html(response.pagination);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+
+            // ✅ Pagination AJAX
+            $(document).on("click", ".pagination a", function (e) {
+                e.preventDefault();
+                let url = $(this).attr("href");
+                if (!url) return;
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    success: function (response) {
+                        $("#logsTableBody").html(response.tableData);
+                        $(".pagination-links").html(response.pagination);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+
+            
+        });
+
+        function updateLastUpdated() {
+            let now = new Date();
+            let formattedDate = now.toLocaleString('en-US', {
+                month: 'short', day: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit', hour12: true
+            });
+            document.getElementById("lastUpdated").innerText = "Last updated: " + formattedDate;
+        }
+    </script>
+
     <style>
         .table-responsive {
             margin: 30px 0;
@@ -147,29 +215,8 @@
         .log-level.info {
             color: green;
         }
-
     </style>
-    <script>
-        $(document).ready(function () {
-            // Activate tooltips
-            $('[data-toggle="tooltip"]').tooltip();
 
-            // Filter table rows based on searched term
-            $("#search").on("keyup", function () {
-                var term = $(this).val().toLowerCase();
-                $("table tbody tr").each(function () {
-                    $row = $(this);
-                    var name = $row.find("td:nth-child(2)").text().toLowerCase();
-                    console.log(name);
-                    if (name.search(term) < 0) {
-                        $row.hide();
-                    } else {
-                        $row.show();
-                    }
-                });
-            });
-        });
-    </script>
 
     <h3 style="padding-top: 10px;">ยินดีต้อนรับเข้าสู่ระบบจัดการข้อมูลวิจัยของสาขาวิชาวิทยาการคอมพิวเตอร์</h3>
     <br>
@@ -273,7 +320,7 @@
 
         <!-- Chart.js -->
 
-        <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
+
 
 
         <script>
@@ -398,9 +445,7 @@
 
             <div class="card-body">
                 <h4 class="card-title">System Logs</h4>
-                <!-- Advanced Search Form -->
-                <!-- ฟอร์มค้นหาหลัก -->
-                <!-- ✅ FORM ค้นหาหลัก -->
+
 
                 <!-- ✅ FORM ค้นหา Logs -->
                 <form method="GET" id="searchForm">
@@ -425,7 +470,7 @@
                         <div class="col-md-3 d-flex">
                             <button type="submit" class="btn btn-primary">Search Logs</button>
 
-                            <!-- <a href="{{ route('admin.logs.exportCsv') }}" class="btn btn-warning" style="margin-left: 2px;">Export CSV</a> -->
+
                         </div>
                     </div>
 
@@ -445,15 +490,7 @@
                                     <div class="col-md-3">
                                         <input type="text" name="ip_address" class="form-control" placeholder="IP Address">
                                     </div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="start_date" id="start_date" class="form-control datepicker"
-                                            placeholder="Start Date (DD/MM/YYYY)" value="{{ request('start_date') }}">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="end_date" id="end_date" class="form-control datepicker"
 
-                                            placeholder="End Date (DD/MM/YYYY)" value="{{ request('end_date') }}">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -487,72 +524,9 @@
                     {{ $logs->links() }}
                 </div>
             </div>
-            <!-- ✅ JavaScript -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // 🔍 ค้นหา Logs
-                    $("#searchForm").submit(function (e) {
-                        e.preventDefault();
-                        let formData = $(this).serialize();
 
-                        $.ajax({
-                            url: "{{ route('admin.searchLogs') }}",
-                            type: "GET",
-                            data: formData,
-                            success: function (response) {
-                                $("#logsTableBody").html(response.tableData);
-                                $(".pagination-links").html(response.pagination);
-                            },
-                            error: function (xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
-                    });
-                    // 📌 ใช้ Datepicker กับ input field วันที่
-                    $(".datepicker").datepicker({
-                        format: "dd/mm/yyyy",
-                        autoclose: true,
-                        todayHighlight: true,
-                    });
-                    // 🔍 ค้นหา Logs แบบ AJAX
-                    $("#searchForm").submit(function (e) {
-                        e.preventDefault();
-                        let formData = $(this).serialize();
 
-                        $.ajax({
-                            url: "{{ route('admin.searchLogs') }}",
-                            type: "GET",
-                            data: formData,
-                            success: function (response) {
-                                $("#logsTableBody").html(response.tableData);
-                                $(".pagination-links").html(response.pagination);
-                            },
-                            error: function (xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
-                    });
 
-                    // ✅ Pagination AJAX
-                    $(document).on("click", ".pagination a", function (e) {
-                        e.preventDefault();
-                        let url = $(this).attr("href");
-
-                        $.ajax({
-                            url: url,
-                            type: "GET",
-                            success: function (response) {
-                                $("#logsTableBody").html(response.tableData);
-                                $(".pagination-links").html(response.pagination);
-                            },
-                            error: function (xhr) {
-                                console.log(xhr.responseText);
-                            }
-                        });
-                    });
-                });
-            </script>
 
             <!-- Scroll Bar ด้านล่าง -->
             <div class="bottom-scroll">
@@ -560,55 +534,12 @@
             </div>
 
         </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
-        <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js" defer></script>
-        <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js" defer></script>
 
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                flatpickr("#start_date", { dateFormat: "d/m/Y" });
-                flatpickr("#end_date", { dateFormat: "d/m/Y" });
 
-                $("#resetBtn").click(function () {
-                    window.location.href = "{{ route('admin.logs') }}";
-                });
-            });
 
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                let topScroll = document.querySelector(".top-scroll");
-                let bottomScroll = document.querySelector(".bottom-scroll");
-                let tableScroll = document.querySelector(".scroll-container");
 
-                // ทำให้ Scroll บน-ล่าง Sync กัน
-                topScroll.addEventListener("scroll", function () {
-                    tableScroll.scrollLeft = topScroll.scrollLeft;
-                    bottomScroll.scrollLeft = topScroll.scrollLeft;
-                });
 
-                bottomScroll.addEventListener("scroll", function () {
-                    tableScroll.scrollLeft = bottomScroll.scrollLeft;
-                    topScroll.scrollLeft = bottomScroll.scrollLeft;
-                });
-
-                tableScroll.addEventListener("scroll", function () {
-                    topScroll.scrollLeft = tableScroll.scrollLeft;
-                    bottomScroll.scrollLeft = tableScroll.scrollLeft;
-                });
-
-                // ปรับขนาด Scroll ด้านบนให้เท่ากับ Table
-                document.querySelector(".scroll-div").style.width = tableScroll.scrollWidth + "px";
-            });
-        </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                flatpickr("#start_date", { dateFormat: "d/m/Y" });
-                flatpickr("#end_date", { dateFormat: "d/m/Y" });
-            });
-        </script>
     @endif
 
 @endsection
