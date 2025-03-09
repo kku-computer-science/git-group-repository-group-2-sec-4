@@ -69,6 +69,16 @@ class Handler extends ExceptionHandler
         $userName = $user?->name ?? 'Unknown';
         $userEmail = $user?->email ?? 'Unknown';
 
+        // เช็คว่ามันเป็น 404 และเป็นไฟล์ .map หรือไม่
+        if ($exception instanceof HttpException && $exception->getStatusCode() == 404) {
+            $requestUrl = $request->fullUrl();
+
+            // ไม่บันทึก 404 ถ้า URL ลงท้ายด้วย .map
+            if (preg_match('/\.map$/', $requestUrl)) {
+                \Log::debug("Ignored 404 for .map file: " . $requestUrl);
+                return response()->noContent(404);
+            }
+        }
         // ตรวจจับ HTTP 4xx Error ทุกประเภท
         if ($exception instanceof HttpException) {
             $status = $exception->getStatusCode();
@@ -86,7 +96,7 @@ class Handler extends ExceptionHandler
                 ]));
             }
         }
-        
+
 
         // ตรวจจับ Validation Error (422)
         if ($exception instanceof ValidationException) {
