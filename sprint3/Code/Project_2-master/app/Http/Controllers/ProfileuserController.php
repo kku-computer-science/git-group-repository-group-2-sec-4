@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Log;
 use App\Helpers\LogHelper;
 use Illuminate\Support\Carbon;
+use GuzzleHttp\Client;
 class ProfileuserController extends Controller
 {
     public function __construct()
@@ -17,6 +18,51 @@ class ProfileuserController extends Controller
         $this->middleware('auth');
     }
 
+    // ฟังก์ชันดึงค่า cPanel Stats โดยใช้ Guzzle
+    protected function fetchCpanelStats()
+    {
+        $cpanelUser  = env('CPANEL_USER', 'cs040268');
+        $cpanelToken = env('CPANEL_TOKEN', 'MHTMBKRTJ7HP8S2OA0IXQ3VPNUMZVN2O');
+        $cpanelHost  = env('CPANEL_HOST', 'localhost');
+        $cpanelPort  = env('CPANEL_PORT', '2083');
+
+        $client = new \GuzzleHttp\Client([
+            'base_uri' => "https://{$cpanelHost}:{$cpanelPort}/",
+            'verify'   => false,
+        ]);
+
+        try {
+            // เรียกโมดูล Quota แทน
+            $response = $client->get('execute/Quota/get_quota_info', [
+                'headers' => [
+                    'Authorization' => "cpanel {$cpanelUser}:{$cpanelToken}"
+                ]
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+            //dd($data);  ดูโครงสร้างทั้งหมดงหมด
+
+            $diskUsed  = $data['data']['megabytes_used'] ?? null;
+            $diskLimit = $data['data']['megabyte_limit'] ?? null;
+            // API นี้ไม่คืนค่าบน Bandwidth → กำหนดเป็น null
+            $bwUsed    = null;
+            $bwLimit   = null;
+            $fileUsage = $data['data']['inodes_used'] ?? null;
+            $fileLimit = $data['data']['inode_limit'] ?? null;
+
+            return [
+                'diskUsed'  => $diskUsed,
+                'diskLimit' => $diskLimit,
+                'bwUsed'    => $bwUsed,
+                'bwLimit'   => $bwLimit,
+                'fileUsage' => $fileUsage,
+                'fileLimit' => $fileLimit,
+            ];
+        } catch (\Exception $e) {
+            // หากเกิดข้อผิดพลาด ให้ส่งข้อมูล error กลับไปด้วย
+            return ['error' => $e->getMessage()];
+        }
+    }
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -33,13 +79,16 @@ class ProfileuserController extends Controller
         // รับค่าช่วงเวลาจาก Request (ค่าเริ่มต้น: "now")
         $timeRange = $request->input('time_range', 'now');
 
-        // 1) อ่านค่าที่ส่งมาจาก select (cleanup_interval) หรือใช้ค่าจาก session ถ้ายังไม่เคยตั้งค่า
+        
         $cleanupInterval = $request->input('cleanup_interval', session('cleanup_interval', '30d'));
 
-        // 2) เก็บลง session เพื่อคงค่าที่เลือกไว้
+        $cpanelStats = $this->fetchCpanelStats();
+        //dd($cpanelStats);  หรือ Log::info($cpanelStats);
+
+        
         session(['cleanup_interval' => $cleanupInterval]);
 
-        // 3) คำนวณ threshold ตามค่า cleanupInterval
+        
         switch ($cleanupInterval) {
             case '5min':
                 $threshold = Carbon::now()->subMinutes(5);
@@ -59,9 +108,9 @@ class ProfileuserController extends Controller
                 break;
         }
 
-        // 4) ลบ Log ที่เก่ากว่า threshold ทุกครั้งที่โหลดหน้า
-        \App\Models\Log::where('created_at', '<', $threshold)->delete();
         
+        \App\Models\Log::where('created_at', '<', $threshold)->delete();
+
         // 🔹 กำหนดช่วงเวลาเริ่มต้น
         switch ($timeRange) {
             case '1h':
@@ -163,8 +212,8 @@ class ProfileuserController extends Controller
             'timeRange',
             'logs',
             'logTimestamps',
-            'logCounts'
-
+            'logCounts',
+            'cpanelStats'
         ));
     }
 

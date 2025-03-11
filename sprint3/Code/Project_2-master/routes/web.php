@@ -156,6 +156,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/search-logs', [ProfileuserController::class, 'searchLogs'])->name('admin.searchLogs'); // Route สำหรับ AJAX Search
     
     Route::post('/admin/logs/cleanup', [ProfileuserController::class, 'cleanupLogs'])->name('admin.logs.cleanup'); // Route สำหรับลบ Logs ตามช่วงเวลา
+    Route::get('/cpanel-stats', [ProfileuserController::class, 'getCpanelStats'])->name('cpanel.stats');
 
 });
 

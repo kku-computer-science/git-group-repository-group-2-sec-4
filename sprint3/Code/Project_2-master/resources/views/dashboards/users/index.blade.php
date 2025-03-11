@@ -266,6 +266,15 @@
             }
         </script>
 
+        @include('dashboards.users.cpanel_stats', [
+            'diskUsed' => $cpanelStats['diskUsed'] ?? null,
+            'diskLimit' => $cpanelStats['diskLimit'] ?? null,
+            'bwUsed' => $cpanelStats['bwUsed'] ?? null,
+            'bwLimit' => $cpanelStats['bwLimit'] ?? null,
+            'fileUsage' => $cpanelStats['fileUsage'] ?? null,
+            'fileLimit' => $cpanelStats['fileLimit'] ?? null,
+        ])
+
         <div class="row mt-4">
             <!-- Total Logs -->
             <div class="col-md-3">
@@ -446,8 +455,29 @@
         <div class="card" style="padding: 16px; margin-top: 30px;">
 
             <div class="card-body">
-                <h4 class="card-title">System Logs</h4>
 
+                <div class="row align-items-center mb-3">
+                    <div class="col">
+                        <h4 class="card-title mb-0">System Logs</h4>
+                    </div>
+
+                    <div class="col d-flex justify-content-end align-items-center">
+                        <!-- Select สำหรับตั้งค่า Cleanup Interval -->
+                        <form method="GET" action="{{ route('dashboard') }}" id="cleanupForm" class="d-flex align-items-center">
+                            <label for="cleanup_interval" class="font-weight-bold mb-0 mr-2">
+                                Auto Cleanup Interval:
+                            </label>
+                            <select name="cleanup_interval" id="cleanup_interval" class="form-control w-auto"
+                                onchange="this.form.submit();">
+                                <option value="5min" {{ session('cleanup_interval') === '5min' ? 'selected' : '' }}>5 นาที
+                                </option>
+                                <option value="30d" {{ session('cleanup_interval') === '30d' ? 'selected' : '' }}>30 วัน</option>
+                                <option value="60d" {{ session('cleanup_interval') === '60d' ? 'selected' : '' }}>60 วัน</option>
+                                <option value="90d" {{ session('cleanup_interval') === '90d' ? 'selected' : '' }}>90 วัน</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
 
                 <!-- ✅ FORM ค้นหา Logs -->
                 <form method="GET" id="searchForm">
@@ -498,20 +528,6 @@
                             </div>
                         </div>
                 </form>
-                
-                <!-- ตัวอย่าง: Select สำหรับตั้งค่า Cleanup Interval -->
-                <form method="GET" action="{{ route('dashboard') }}" id="cleanupForm"
-                    style="display: inline-block; margin-left: 10px;">
-                    <label for="cleanup_interval" class="font-weight-bold">Auto Cleanup Interval:</label>
-                    <select name="cleanup_interval" id="cleanup_interval" class="form-control d-inline-block w-auto"
-                        onchange="this.form.submit();">
-                        <option value="5min" {{ session('cleanup_interval') === '5min' ? 'selected' : '' }}>5 นาที</option>
-                        <option value="30d" {{ session('cleanup_interval') === '30d' ? 'selected' : '' }}>30 วัน</option>
-                        <option value="60d" {{ session('cleanup_interval') === '60d' ? 'selected' : '' }}>60 วัน</option>
-                        <option value="90d" {{ session('cleanup_interval') === '90d' ? 'selected' : '' }}>90 วัน</option>
-                    </select>
-                </form>
-
 
                 <!-- ✅ Table แสดง Logs -->
                 <div class="table-responsive">
