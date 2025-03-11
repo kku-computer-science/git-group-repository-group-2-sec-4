@@ -72,7 +72,14 @@ Route::middleware(['middleware' => 'PreventBackHistory'])->group(function () {
 });
 
 
-
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    return "Cache cleared successfully!";
+});
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/researchers',[ResearcherController::class,'index'])->name('researchers');
 Route::get('researchers/{id}', [ResearcherController::class, 'request'])->name('researchers');
@@ -146,7 +153,9 @@ Route::group(['middleware' => ['auth', 'PreventBackHistory']], function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/logs', [LogController::class, 'index'])->name('admin.logs');
     Route::get('/admin/logs/export', [LogController::class, 'exportCsv'])->name('admin.logs.exportCsv');
-    Route::get('/admin/search-logs', [ProfileuserController::class, 'searchLogs'])->name('admin.searchLogs'); // ✅ Route สำหรับ AJAX Search
+    Route::get('/admin/search-logs', [ProfileuserController::class, 'searchLogs'])->name('admin.searchLogs'); // Route สำหรับ AJAX Search
+    
+    Route::post('/admin/logs/cleanup', [ProfileuserController::class, 'cleanupLogs'])->name('admin.logs.cleanup'); // Route สำหรับลบ Logs ตามช่วงเวลา
 
 });
 

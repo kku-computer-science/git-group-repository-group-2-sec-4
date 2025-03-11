@@ -33,7 +33,35 @@ class ProfileuserController extends Controller
         // รับค่าช่วงเวลาจาก Request (ค่าเริ่มต้น: "now")
         $timeRange = $request->input('time_range', 'now');
 
+        // 1) อ่านค่าที่ส่งมาจาก select (cleanup_interval) หรือใช้ค่าจาก session ถ้ายังไม่เคยตั้งค่า
+        $cleanupInterval = $request->input('cleanup_interval', session('cleanup_interval', '30d'));
 
+        // 2) เก็บลง session เพื่อคงค่าที่เลือกไว้
+        session(['cleanup_interval' => $cleanupInterval]);
+
+        // 3) คำนวณ threshold ตามค่า cleanupInterval
+        switch ($cleanupInterval) {
+            case '5min':
+                $threshold = Carbon::now()->subMinutes(5);
+                break;
+            case '30d':
+                $threshold = Carbon::now()->subDays(30);
+                break;
+            case '60d':
+                $threshold = Carbon::now()->subDays(60);
+                break;
+            case '90d':
+                $threshold = Carbon::now()->subDays(90);
+                break;
+            default:
+                // เผื่อกรณีไม่ตรงเงื่อนไขหรือครั้งแรก ๆ
+                $threshold = Carbon::now()->subDays(30);
+                break;
+        }
+
+        // 4) ลบ Log ที่เก่ากว่า threshold ทุกครั้งที่โหลดหน้า
+        \App\Models\Log::where('created_at', '<', $threshold)->delete();
+        
         // 🔹 กำหนดช่วงเวลาเริ่มต้น
         switch ($timeRange) {
             case '1h':
@@ -406,4 +434,5 @@ class ProfileuserController extends Controller
 
         return view('dashboards.users.index', compact('logs'));
     }
+
 }

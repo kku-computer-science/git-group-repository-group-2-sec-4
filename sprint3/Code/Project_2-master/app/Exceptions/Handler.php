@@ -69,6 +69,21 @@ class Handler extends ExceptionHandler
         $userName = $user?->name ?? 'Unknown';
         $userEmail = $user?->email ?? 'Unknown';
 
+        // ✅ เช็ค URL และไม่บันทึก log สำหรับ favicon.ico และไฟล์ .map
+        $excludedPaths = [
+            'favicon.ico',
+            'images/icons/favicon.ico',
+            'vendors/mdi/css/materialdesignicons.css.map',
+            'maps/vertical-layout-light/style.css.map',
+            'vendors/js/perfect-scrollbar.min.js.map',
+            'vendors/progressbar.js/progressbar.min.js.map',
+        ];
+        foreach ($excludedPaths as $excludedPath) {
+            if (str_contains($request->path(), $excludedPath)) {
+                return parent::render($request, $exception);
+            }
+        }
+        
         // เช็คว่ามันเป็น 404 และเป็นไฟล์ .map หรือไม่
         if ($exception instanceof HttpException && $exception->getStatusCode() == 404) {
             $requestUrl = $request->fullUrl();

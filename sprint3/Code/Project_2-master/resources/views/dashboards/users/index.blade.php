@@ -1,7 +1,9 @@
 @extends('dashboards.users.layouts.user-dash-layout')
 @section('title', 'Dashboard')
 
+
 @section('content')
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
@@ -57,7 +59,7 @@
                 });
             });
 
-            
+
         });
 
         function updateLastUpdated() {
@@ -469,33 +471,48 @@
                         </div>
                         <div class="col-md-3 d-flex">
                             <button type="submit" class="btn btn-primary">Search Logs</button>
-
-
                         </div>
-                    </div>
 
-                    <!-- ✅ Advanced Filters -->
 
-                    <div class="mt-3">
-                        <a data-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false" class="advanced">
-                            Advanced Filters <i class="fa fa-angle-down"></i>
-                        </a>
 
-                        <div class="collapse" id="advancedSearch">
-                            <div class="card card-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="text" name="action" class="form-control" placeholder="Action">
+
+
+                        <div class="mt-3">
+                            <a data-toggle="collapse" href="#advancedSearch" role="button" aria-expanded="false"
+                                class="advanced">
+                                Advanced Filters <i class="fa fa-angle-down"></i>
+                            </a>
+
+                            <div class="collapse" id="advancedSearch">
+                                <div class="card card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input type="text" name="action" class="form-control" placeholder="Action">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" name="ip_address" class="form-control" placeholder="IP Address">
+                                        </div>
+
                                     </div>
-                                    <div class="col-md-3">
-                                        <input type="text" name="ip_address" class="form-control" placeholder="IP Address">
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </form>
+                
+                <!-- ตัวอย่าง: Select สำหรับตั้งค่า Cleanup Interval -->
+                <form method="GET" action="{{ route('dashboard') }}" id="cleanupForm"
+                    style="display: inline-block; margin-left: 10px;">
+                    <label for="cleanup_interval" class="font-weight-bold">Auto Cleanup Interval:</label>
+                    <select name="cleanup_interval" id="cleanup_interval" class="form-control d-inline-block w-auto"
+                        onchange="this.form.submit();">
+                        <option value="5min" {{ session('cleanup_interval') === '5min' ? 'selected' : '' }}>5 นาที</option>
+                        <option value="30d" {{ session('cleanup_interval') === '30d' ? 'selected' : '' }}>30 วัน</option>
+                        <option value="60d" {{ session('cleanup_interval') === '60d' ? 'selected' : '' }}>60 วัน</option>
+                        <option value="90d" {{ session('cleanup_interval') === '90d' ? 'selected' : '' }}>90 วัน</option>
+                    </select>
+                </form>
+
+
                 <!-- ✅ Table แสดง Logs -->
                 <div class="table-responsive">
                     <table class="table table-striped">

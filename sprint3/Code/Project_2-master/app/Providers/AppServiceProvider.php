@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
+use Illuminate\Support\Facades\DB;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        
+        date_default_timezone_set('Asia/Bangkok'); // ตั้งค่า PHP Time Zone
+        DB::statement("SET time_zone = '+07:00'"); // ตั้งค่า MySQL Time 
+        
         view()->composer(
             'layouts.layout', 
             function ($view) {
