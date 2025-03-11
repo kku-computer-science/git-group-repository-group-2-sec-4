@@ -1,10 +1,12 @@
 <?php
-   
+
 namespace App\Console;
-    
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-    
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -15,7 +17,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\DemoCron::class,
     ];
-     
+
     /**
      * Define the application's command schedule.
      *
@@ -27,8 +29,10 @@ class Kernel extends ConsoleKernel
         #$schedule->command('demo:cron')->cron('0 0 15 2,5,8,11 *')->timezone('Asia/Bangkok');
         $schedule->command('demo:cron')->at('16:38')->timezone('Asia/Bangkok');
         //$schedule->command('demo:cron')->cron('58 15 20 2,4,8,11 *')->timezone('Asia/Bangkok');
+
+        
     }
-     
+
     /**
      * Register the commands for the application.
      *
@@ -36,8 +40,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
-     
+        $this->load(__DIR__ . '/Commands');
+
         require base_path('routes/console.php');
     }
 }
