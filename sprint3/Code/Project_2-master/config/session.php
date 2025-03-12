@@ -19,7 +19,7 @@ return [
     */
 
     'driver' => env('SESSION_DRIVER', 'file'),
-
+    'driver' => 'database',
     /*
     |--------------------------------------------------------------------------
     | Session Lifetime
@@ -197,5 +197,4 @@ return [
     */
 
     'same_site' => 'lax',
-
 ];
