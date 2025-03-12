@@ -52,7 +52,7 @@ This is a user manual for Sprint#2 for admin.
 
 1. Enter **username** and **password** with an Admin account.
 
-![loginpage](../Img/loginpage.png)
+![loginpage](../Img/loginpage_eng.png)
 
 2. After successful login, you will be redirected to the Dashboard.
 3. The dashboard will display information for the **user's activity log**, **error log**, and **important system information log**.
