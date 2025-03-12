@@ -11,6 +11,7 @@ use App\Models\Log;
 use App\Helpers\LogHelper;
 use Illuminate\Support\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 class ProfileuserController extends Controller
 {
     public function __construct()
@@ -21,14 +22,14 @@ class ProfileuserController extends Controller
     // ฟังก์ชันดึงค่า cPanel Stats โดยใช้ Guzzle
     protected function fetchCpanelStats()
     {
-        $cpanelUser  = env('CPANEL_USER', 'cs040268');
+        $cpanelUser = env('CPANEL_USER', 'cs040268');
         $cpanelToken = env('CPANEL_TOKEN', 'MHTMBKRTJ7HP8S2OA0IXQ3VPNUMZVN2O');
-        $cpanelHost  = env('CPANEL_HOST', 'localhost');
-        $cpanelPort  = env('CPANEL_PORT', '2083');
+        $cpanelHost = env('CPANEL_HOST', 'localhost');
+        $cpanelPort = env('CPANEL_PORT', '2083');
 
         $client = new \GuzzleHttp\Client([
             'base_uri' => "https://{$cpanelHost}:{$cpanelPort}/",
-            'verify'   => false,
+            'verify' => false,
         ]);
 
         try {
@@ -42,19 +43,19 @@ class ProfileuserController extends Controller
             $data = json_decode($response->getBody(), true);
             //dd($data);  ดูโครงสร้างทั้งหมดงหมด
 
-            $diskUsed  = $data['data']['megabytes_used'] ?? null;
+            $diskUsed = $data['data']['megabytes_used'] ?? null;
             $diskLimit = $data['data']['megabyte_limit'] ?? null;
             // API นี้ไม่คืนค่าบน Bandwidth → กำหนดเป็น null
-            $bwUsed    = null;
-            $bwLimit   = null;
+            $bwUsed = null;
+            $bwLimit = null;
             $fileUsage = $data['data']['inodes_used'] ?? null;
             $fileLimit = $data['data']['inode_limit'] ?? null;
 
             return [
-                'diskUsed'  => $diskUsed,
+                'diskUsed' => $diskUsed,
                 'diskLimit' => $diskLimit,
-                'bwUsed'    => $bwUsed,
-                'bwLimit'   => $bwLimit,
+                'bwUsed' => $bwUsed,
+                'bwLimit' => $bwLimit,
                 'fileUsage' => $fileUsage,
                 'fileLimit' => $fileLimit,
             ];
@@ -79,37 +80,50 @@ class ProfileuserController extends Controller
         // รับค่าช่วงเวลาจาก Request (ค่าเริ่มต้น: "now")
         $timeRange = $request->input('time_range', 'now');
 
-        
-        $cleanupInterval = $request->input('cleanup_interval', session('cleanup_interval', '30d'));
-
         $cpanelStats = $this->fetchCpanelStats();
         //dd($cpanelStats);  หรือ Log::info($cpanelStats);
 
-        
+
+        $cleanupInterval = $request->input('cleanup_interval', session('cleanup_interval', '30d'));
         session(['cleanup_interval' => $cleanupInterval]);
 
-        
+        // ตั้งค่า threshold สำหรับการลบ Logs ตาม cleanup_interval ที่ผู้ใช้เลือก
         switch ($cleanupInterval) {
             case '5min':
-                $threshold = Carbon::now()->subMinutes(5);
+                $cleanupThreshold = Carbon::now()->subMinutes(5);
                 break;
             case '30d':
-                $threshold = Carbon::now()->subDays(30);
+                $cleanupThreshold = Carbon::now()->subDays(30);
                 break;
             case '60d':
-                $threshold = Carbon::now()->subDays(60);
+                $cleanupThreshold = Carbon::now()->subDays(60);
                 break;
             case '90d':
-                $threshold = Carbon::now()->subDays(90);
+                $cleanupThreshold = Carbon::now()->subDays(90);
                 break;
             default:
-                // เผื่อกรณีไม่ตรงเงื่อนไขหรือครั้งแรก ๆ
-                $threshold = Carbon::now()->subDays(30);
+                $cleanupThreshold = Carbon::now()->subDays(30);
                 break;
         }
+        \App\Models\Log::where('created_at', '<', $cleanupThreshold)->delete();
 
-        
-        \App\Models\Log::where('created_at', '<', $threshold)->delete();
+
+        // 1) นับจำนวน User ทั้งหมด
+        $allUsersCount = \App\Models\User::count();
+        // 2) นับจำนวนผู้ใช้งานที่ออนไลน์ 
+        //    กำหนด threshold เช่น 5 นาที (300 วินาที)
+        $onlineThreshold = Carbon::now()->subMinutes(5)->timestamp;
+        // หากใน sessions table ยังเก็บ user_id เป็น BigInteger + nullable
+        // และอยากนับ user ที่ล็อกอินเท่านั้น → ต้อง != null
+        // distinct() บน user_id เผื่อมีหลาย session แต่เป็น user เดิม
+        $onlineUsersCount = DB::table('sessions')
+            ->where('last_activity', '>=', $onlineThreshold)
+            ->whereNotNull('user_id')
+            ->distinct('user_id')
+            ->count('user_id');
+
+
+        // \App\Models\Log::where('created_at', '<', $threshold)->delete();
 
         // 🔹 กำหนดช่วงเวลาเริ่มต้น
         switch ($timeRange) {
@@ -213,7 +227,9 @@ class ProfileuserController extends Controller
             'logs',
             'logTimestamps',
             'logCounts',
-            'cpanelStats'
+            'cpanelStats',
+            'allUsersCount',
+            'onlineUsersCount'
         ));
     }
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Log;
 use App\Helpers\LogHelper;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -58,7 +59,19 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         try {
+            // เก็บ user_id ก่อน Logout
+            $userId = Auth::id();
             $user = Auth::user();
+
+            // ทำการ Logout และล้าง session
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+
+            // ลบ session record ของ user นี้ออกจากตาราง sessions
+            DB::table('sessions')->where('user_id', $userId)->delete();
+
             // บันทึก log
             LogHelper::log(
                 'User Logout',
@@ -70,7 +83,7 @@ class LoginController extends Controller
 
             $request->session()->flush();
             $request->session()->regenerate();
-            Auth::logout();
+            
             return redirect('/login');
 
         } catch (\Exception $e) {
