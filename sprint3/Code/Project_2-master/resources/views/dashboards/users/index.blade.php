@@ -226,20 +226,36 @@
 
     @if($isAdmin)
 
-        <!--Select Time Range มาด้านบนสุด -->
-        <div class="row align-items-center d-flex justify-content-between">
-            <!-- ✅ คอลัมน์ซ้ายสุดสำหรับ Last Updated -->
+        <div class="row align-items-center mb-3">
+            <!-- ด้านซ้าย: Last Updated -->
             <div class="col-md-6">
                 <p id="lastUpdated" class="text-muted m-0">
                     Last updated: {{ \Carbon\Carbon::now()->format('M d, Y, h:i A') }}
                 </p>
             </div>
 
-            <!-- ✅ คอลัมน์ขวาสุดสำหรับ Select Time Range -->
-            <div class="col-md-6 d-flex justify-content-end">
-                <form method="GET" action="{{ route('dashboard') }}" id="timeRangeForm">
-                    <label for="time_range" class="font-weight-bold">Select Time Range:</label>
-                    <select name="time_range" id="time_range" class="form-control d-inline-block w-auto"
+            <!-- ด้านขวา: Online Users + Select Time Range -->
+            <div class="col-md-6 d-flex align-items-center justify-content-end">
+                <!-- On line Users (ลด margin-end จาก me-3 เป็น me-1) -->
+                <p class="mb-0 me-2">
+                    <span class="badge bg-success rounded-pill text-white" style="font-size: 1.2em;">
+                        <i class="fas fa-user me-1"></i>
+                        Online Users: <strong>{{ $onlineUsersCount }}</strong>
+                    </span>
+                </p>
+
+                <!-- ปุ่ม Refresh -->
+                <form method="GET" action="{{ route('dashboard') }}" class="me-2">
+                    <button type="submit" class="btn btn-info d-flex align-items-center justify-content-center"
+                        style="width: 30px; height: 30px; padding: 0; border-radius: 40%;">
+                        <i class="fas fa-sync-alt" style="font-size: 16px;"></i>
+                    </button>
+                </form>
+
+                <!-- Select Time Range -->
+                <form method="GET" action="{{ route('dashboard') }}" id="timeRangeForm" class="d-flex align-items-center">
+                    <label for="time_range" class="font-weight-bold mb-0 me-2">Select Time Range:</label>
+                    <select name="time_range" id="time_range" class="form-control w-auto"
                         onchange="updateLastUpdated(); this.form.submit();">
                         <option value="now" {{ $timeRange == 'now' ? 'selected' : '' }}>Now</option>
                         <option value="1h" {{ $timeRange == '1h' ? 'selected' : '' }}>Last 1 Hour</option>
@@ -254,7 +270,9 @@
                     </select>
                 </form>
             </div>
+
         </div>
+
         <script>
             function updateLastUpdated() {
                 let now = new Date();
@@ -275,47 +293,112 @@
             'fileLimit' => $cpanelStats['fileLimit'] ?? null,
         ])
 
-        <div class="row mt-4">
-            <!-- Total Logs -->
-            <div class="col-md-3">
+
+        <!-- <div class="row mt-4"> -->
+        <!-- Total Logs -->
+        <!-- <div class="col-md-3">
+                                                                                                        <div class="card shadow-sm border-dark log-filter" data-type="totalLogs">
+                                                                                                            <div class="card-body">
+                                                                                                                <h5 class="card-title text-dark"><i class="fas fa-clipboard-list"></i> Total Logs</h5>
+                                                                                                                <p class="card-text"><strong>{{ $logsCount }}</strong></p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div> -->
+
+        <!-- Error Logs -->
+        <!-- <div class="col-md-3">
+                                                                                                        <div class="card shadow-sm border-danger log-filter" data-type="errors">
+                                                                                                            <div class="card-body">
+                                                                                                                <h5 class="card-title text-danger"><i class="fas fa-exclamation-circle"></i> Total Errors</h5>
+                                                                                                                <p class="card-text"><strong>{{ $errorLogsCount }}</strong></p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div> -->
+
+        <!-- Warning Logs -->
+        <!-- <div class="col-md-3">
+                                                                                                        <div class="card shadow-sm border-warning log-filter" data-type="warnings">
+                                                                                                            <div class="card-body">
+                                                                                                                <h5 class="card-title text-warning"><i class="fas fa-exclamation-triangle"></i> Total Warnings</h5>
+                                                                                                                <p class="card-text"><strong>{{ $warningLogsCount }}</strong></p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div> -->
+
+        <!-- Info Logs -->
+        <!-- <div class="col-md-3">
+                                                                                                        <div class="card shadow-sm border-info log-filter" data-type="info">
+                                                                                                            <div class="card-body">
+                                                                                                                <h5 class="card-title text-info"><i class="fas fa-info-circle"></i> Total Info</h5>
+                                                                                                                <p class="card-text"><strong>{{ $infoLogsCount }}</strong></p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div> -->
+
+        <!-- </div> -->
+        <div class="row row-cols-5 g-3 mt-1"><!-- g-3 คือ gap ระหว่าง card -->
+            <!-- Card 1 -->
+            <div class="col">
                 <div class="card shadow-sm border-dark log-filter" data-type="totalLogs">
                     <div class="card-body">
-                        <h5 class="card-title text-dark"><i class="fas fa-clipboard-list"></i> Total Logs</h5>
+                        <h5 class="card-title text-dark">
+                            <i class="fas fa-clipboard-list"></i> Total Logs
+                        </h5>
                         <p class="card-text"><strong>{{ $logsCount }}</strong></p>
                     </div>
                 </div>
             </div>
 
-            <!-- Error Logs -->
-            <div class="col-md-3">
+            <!-- Card 2 -->
+            <div class="col">
                 <div class="card shadow-sm border-danger log-filter" data-type="errors">
                     <div class="card-body">
-                        <h5 class="card-title text-danger"><i class="fas fa-exclamation-circle"></i> Total Errors</h5>
+                        <h5 class="card-title text-danger">
+                            <i class="fas fa-exclamation-circle"></i> Total Errors
+                        </h5>
                         <p class="card-text"><strong>{{ $errorLogsCount }}</strong></p>
                     </div>
                 </div>
             </div>
 
-            <!-- Warning Logs -->
-            <div class="col-md-3">
+            <!-- Card 3 -->
+            <div class="col">
                 <div class="card shadow-sm border-warning log-filter" data-type="warnings">
                     <div class="card-body">
-                        <h5 class="card-title text-warning"><i class="fas fa-exclamation-triangle"></i> Total Warnings</h5>
+                        <h5 class="card-title text-warning">
+                            <i class="fas fa-exclamation-triangle"></i> Total Warnings
+                        </h5>
                         <p class="card-text"><strong>{{ $warningLogsCount }}</strong></p>
                     </div>
                 </div>
             </div>
 
-            <!-- Info Logs -->
-            <div class="col-md-3">
+            <!-- Card 4 -->
+            <div class="col">
                 <div class="card shadow-sm border-info log-filter" data-type="info">
                     <div class="card-body">
-                        <h5 class="card-title text-info"><i class="fas fa-info-circle"></i> Total Info</h5>
+                        <h5 class="card-title text-info">
+                            <i class="fas fa-info-circle"></i> Total Info
+                        </h5>
                         <p class="card-text"><strong>{{ $infoLogsCount }}</strong></p>
                     </div>
                 </div>
             </div>
+
+            <!-- Card 5 -->
+            <div class="col">
+                <div class="card shadow-sm border-dark">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">
+                            <i class="fas fa-users"></i> Total Users
+                        </h5>
+                        <p class="card-text"><strong>{{ $allUsersCount }}</strong></p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
 
         <!-- Area Chart -->
         <div class="card shadow mb-4" style="margin-top: 30px; ">
